@@ -124,3 +124,30 @@ confidenceEllipse <- function(X.mean = c(0,0),
     points(x = X.mean[1,1], y = X.mean[2,1], pch = 19)
   }
 }
+
+# This is a work in progress! Need to convert this example to a function.
+# Resume working here.
+bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eigen, xl = NULL, yl = NULL, limadj = 0.02, alpha = 0.05){
+    # Example 4.2
+  e1 <- matrix(c(1/sqrt(2),1/sqrt(2)),ncol=1)
+  e2 <- matrix(c(1/sqrt(2),-1/sqrt(2)),ncol=1)
+  eigenvectors <- cbind(e1,e2)
+
+  angle <- atan(eigenvectors[2,1]/eigenvectors[1,1]) # sohcahtoa
+
+  mu <- c(0,0)
+
+  s11 <- 1
+  s12 <- 0.75
+
+  # From Johnson & Wichern (2008) result (4-8)
+  clevel <- qchisq(1 - alpha, df = 2)
+  lengths <- c(clevel * sqrt(s11+s12),clevel*sqrt(s11-s12))
+
+  # We should call an ellipse function here, passing the calculated lengths to it and have it dynamically generate xl and yl
+  plot(0,pch='',ylab='',xlab='',xlim=c(-5,5),ylim=c(-5,5))
+  draw.ellipse(x=mu[1],y=mu[2],
+               a=lengths[1],b=lengths[2],
+               angle=angle,deg=FALSE)
+
+}
