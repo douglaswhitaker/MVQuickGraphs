@@ -49,7 +49,7 @@ t.bonf <- qt(1-alpha.b,df=n-1)
 (u3b <- x.bar[3,1] + t.bonf * sqrt(S[3,3]/n))
 
 source("R/general.R")
-bvNormalContours(X.mean=x.bar,eig=eigen(S[1:2,1:2]),n=n,p=p,center=FALSE,axes=FALSE,xl=c(2,7),yl=c(30,60),alpha=0.05)
+confidenceEllipse(X.mean=x.bar,eig=eigen(S[1:2,1:2]),n=n,p=p,center=FALSE,axes=FALSE,xl=c(2,7),yl=c(30,60),alpha=0.05)
 # Simultaneous
 abline(v=l1,lty=3)
 abline(v=u1,lty=3)

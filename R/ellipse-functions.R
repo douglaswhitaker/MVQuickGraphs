@@ -15,7 +15,11 @@ confidenceEllipse <- function(X.mean = c(0,0),
                               axes = TRUE, # if TRUE, the major and minor axes of the ellipse are graphed
                               center = TRUE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
                               limadj = 0.02, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
-                              alpha = 0.05){ # the alpha-level used to determine which ellipse is drawn
+                              alpha = 0.05, # the alpha-level used to determine which ellipse is drawn
+                              ...){
+
+  # eigenEllipseHelper is expecting a matrix... might be better to eventually change that
+  X.mean <- matrix(X.mean, ncol=1)
 
   # Calculate the angle of rotation.
   # Because we are taking this as output of eigen(),
@@ -40,6 +44,58 @@ confidenceEllipse <- function(X.mean = c(0,0),
            (n * (n - p)) *
            qf(1 - alpha, p, n - p))
 
+  # create a vector of axis lengths we can use
+  lengths <- c(axis1,axis2)
+
+  eigenEllipseHelper(mu = X.mean, lengths = lengths, angle = angle,
+                     xl = xl, yl = yl,
+                     axes = axes, center = center,
+                     limadj = limadj, ...)
+}
+
+# This is a work in progress! Need to convert this example to a function.
+# Resume working here.
+bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
+                            xl = NULL, yl = NULL,
+                            axes = TRUE, center = TRUE,
+                            limadj = 0.02, alpha = 0.05, ...){
+
+  # eigenEllipseHelper is expecting a matrix... might be better to eventually change that
+  mu <- matrix(mu, ncol=1)
+
+  # Critical value for the constant density contour (always df=2 because this is bivariate normal)
+  # Johnson & Wichern (2008) result (4-8)
+  clevel <- qchisq(1 - alpha, df = 2)
+
+  # User needs to supply either eig or Sigma
+  if (!is.null(Sigma)){
+    eig <- eigen(Sigma)
+  }
+
+  # From Johnson & Wichern (2008) result (4-8)
+  # The half-lengths are c*sqrt(lambda_i); the eigenvectors determine the angle
+  #lengths <- c(clevel * sqrt(s11+s12),clevel*sqrt(s11-s12))
+  lengths <- c(clevel * sqrt(eig$values[1]), clevel * sqrt(eig$values[2]))
+
+  # We should call an ellipse function here, passing the calculated lengths to it and have it dynamically generate xl and yl
+  angle <- atan(eig$vectors[2,1]/eig$vectors[1,1]) # sohcahtoa
+
+  eigenEllipseHelper(mu = mu, lengths = lengths, angle = angle,
+                     xl = xl, yl = yl,
+                     axes = axes, center = center,
+                     limadj = limadj, ...)
+
+  # plot(0,pch='',ylab='',xlab='',xlim=c(-5,5),ylim=c(-5,5))
+  # draw.ellipse(x=mu[1],y=mu[2],
+  #              a=lengths[1],b=lengths[2],
+  #              angle=angle,deg=FALSE)
+
+}
+
+eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, limadj, axes, center, ...){
+  axis1 <- lengths[1]
+  axis2 <- lengths[2]
+
   # Calculate x and y components for each axis.
   # We will use these to determine position from the origin (mean) later.
   axis1.x <- cos(angle) * axis1
@@ -51,20 +107,20 @@ confidenceEllipse <- function(X.mean = c(0,0),
   if (is.null(xl)){
     # calculate the lower x limit by determining the minimum x value needed
     # use the offsets from the mean calculated earlier
-    xl1 <- min(X.mean[1,1] + axis1.x,
-               X.mean[1,1] - axis1.x,
-               X.mean[1,1] + axis2.x,
-               X.mean[1,1] - axis2.x)
+    xl1 <- min(mu[1,1] + axis1.x,
+               mu[1,1] - axis1.x,
+               mu[1,1] + axis2.x,
+               mu[1,1] - axis2.x)
     # adjust the limit by the specified value
     # larger values of limadj decrease the lower limit
     xl1 <- xl1 * (1 - limadj)
 
     # calculate the upper x limit
     # using the same set of offsets from the mean, determine the largest value needed
-    xl2 <- max(X.mean[1,1] + axis1.x,
-               X.mean[1,1] - axis1.x,
-               X.mean[1,1] + axis2.x,
-               X.mean[1,1] - axis2.x)
+    xl2 <- max(mu[1,1] + axis1.x,
+               mu[1,1] - axis1.x,
+               mu[1,1] + axis2.x,
+               mu[1,1] - axis2.x)
     # adjust the limit by the specified value
     # larger values of limadj increase the upper limit
     xl2 <- xl2 * (1 + limadj)
@@ -75,20 +131,20 @@ confidenceEllipse <- function(X.mean = c(0,0),
   if (is.null(yl)){
     # calculate the lower y limit by determining the minimum y value needed
     # use the offsets from the mean calculated earlier
-    yl1 <- min(X.mean[2,1] + axis1.y,
-               X.mean[2,1] - axis1.y,
-               X.mean[2,1] + axis2.y,
-               X.mean[2,1] - axis2.y)
+    yl1 <- min(mu[2,1] + axis1.y,
+               mu[2,1] - axis1.y,
+               mu[2,1] + axis2.y,
+               mu[2,1] - axis2.y)
     # adjust the limit by the specified value
     # larger values of limadj decrease the lower limit
     yl1 <- yl1 * (1 - limadj)
 
     # calculate the upper y limit
     # using the same set of offsets from the mean, determine the largest value needed
-    yl2 <- max(X.mean[2,1] + axis1.y,
-               X.mean[2,1] - axis1.y,
-               X.mean[2,1] + axis2.y,
-               X.mean[2,1] - axis2.y)
+    yl2 <- max(mu[2,1] + axis1.y,
+               mu[2,1] - axis1.y,
+               mu[2,1] + axis2.y,
+               mu[2,1] - axis2.y)
     # adjust the limit by the specified value
     # larger values of limadj increase the upper limit
     yl2 <- yl2 * (1 + limadj)
@@ -98,56 +154,26 @@ confidenceEllipse <- function(X.mean = c(0,0),
   # Call an empty graph that we can add the normal contour ellipseto
   plot(0,pch='',ylab='',xlab='',xlim=xl,ylim=yl)
 
-  # create a vector of axis lengths we can use
-  lengths <- c(axis1,axis2)
-
   # draw the ellipse
   # draw.ellipse is from package plotrix
-  draw.ellipse(x = X.mean[1,1], y = X.mean[2,1], # center of the ellipse
+  draw.ellipse(x = mu[1,1], y = mu[2,1], # center of the ellipse
                a = lengths[1], b = lengths[2], # major and minor axis half-lengths
                angle = angle, deg = FALSE) # calculated angle earlier was in radians
 
   # if TRUE draw the major and minor axes for the normal contour ellipse
   # These are just line segments using the offsets from the mean calculcated earlier.
   if (axes){
-    segments(x1 = X.mean[1,1], y1 = X.mean[2,1], x0 = X.mean[1,1] + axis1.x, y0 = X.mean[2,1] + axis1.y)
-    segments(x1 = X.mean[1,1], y1 = X.mean[2,1], x0 = X.mean[1,1] - axis1.x, y0 = X.mean[2,1] - axis1.y)
-    segments(x1 = X.mean[1,1], y1 = X.mean[2,1], x0 = X.mean[1,1] + axis2.x, y0 = X.mean[2,1] + axis2.y)
-    segments(x1 = X.mean[1,1], y1 = X.mean[2,1], x0 = X.mean[1,1] - axis2.x, y0 = X.mean[2,1] - axis2.y)
+    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] + axis1.x, y0 = mu[2,1] + axis1.y)
+    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] - axis1.x, y0 = mu[2,1] - axis1.y)
+    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] + axis2.x, y0 = mu[2,1] + axis2.y)
+    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] - axis2.x, y0 = mu[2,1] - axis2.y)
   }
 
   # if TRUE show the center as a point and draw dashed lines orthogonal to the x and y axes
   # These are just line vertical and horizontal segments from the origin to the x and y axes, respectively
   if (center){
-    segments(x1 = X.mean[1,1], y1 = X.mean[2,1], y0 = X.mean[2,1], x0 = 0, lty=2)
-    segments(x1 = X.mean[1,1], y1 = X.mean[2,1], x0 = X.mean[1,1], y0 = 0, lty=2)
-    points(x = X.mean[1,1], y = X.mean[2,1], pch = 19)
+    segments(x1 = mu[1,1], y1 = mu[2,1], y0 = mu[2,1], x0 = 0, lty=2)
+    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1], y0 = 0, lty=2)
+    points(x = mu[1,1], y = mu[2,1], pch = 19)
   }
-}
-
-# This is a work in progress! Need to convert this example to a function.
-# Resume working here.
-bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eigen, xl = NULL, yl = NULL, limadj = 0.02, alpha = 0.05){
-    # Example 4.2
-  e1 <- matrix(c(1/sqrt(2),1/sqrt(2)),ncol=1)
-  e2 <- matrix(c(1/sqrt(2),-1/sqrt(2)),ncol=1)
-  eigenvectors <- cbind(e1,e2)
-
-  angle <- atan(eigenvectors[2,1]/eigenvectors[1,1]) # sohcahtoa
-
-  mu <- c(0,0)
-
-  s11 <- 1
-  s12 <- 0.75
-
-  # From Johnson & Wichern (2008) result (4-8)
-  clevel <- qchisq(1 - alpha, df = 2)
-  lengths <- c(clevel * sqrt(s11+s12),clevel*sqrt(s11-s12))
-
-  # We should call an ellipse function here, passing the calculated lengths to it and have it dynamically generate xl and yl
-  plot(0,pch='',ylab='',xlab='',xlim=c(-5,5),ylim=c(-5,5))
-  draw.ellipse(x=mu[1],y=mu[2],
-               a=lengths[1],b=lengths[2],
-               angle=angle,deg=FALSE)
-
 }

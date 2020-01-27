@@ -20,3 +20,15 @@ c90 <- qchisq(0.90,df=2)
 lengths90 <- c(c90*sqrt(s11+s12),c90*sqrt(s11-s12))
 draw.ellipse(x=mu[1],y=mu[2],a=lengths90[1],b=lengths90[2],angle=angle,deg=FALSE)
 
+################################
+x.bar <- matrix(c(4.640,
+                  45.400,
+                  9.965),ncol=1)
+S <- matrix(c(2.879, 10.010, -1.810,
+              10.010, 199.788, -5.640,
+              -1.810, -5.640, 3.628),byrow=TRUE,ncol=3)
+p <- 3
+n <- 20
+alpha <- 0.05
+
+confidenceEllipse(X.mean=x.bar,eig=eigen(S[1:2,1:2]),n=n,p=p, limadj = 0.08)
