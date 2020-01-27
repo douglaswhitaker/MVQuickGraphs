@@ -55,6 +55,16 @@ confidenceEllipse <- function(X.mean = c(0,0),
 
 # This is a work in progress! Need to convert this example to a function.
 # Resume working here.
+# 2020-01-26 There seems to be a problem with the way the xl and yl are being determined:
+# Using the ex5.7 values, run these lines:
+
+# bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]), limadj =0.2)
+# bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]))
+# bvNormalContour(mu=x.bar[2:3,1],eig=eigen(S[1:2,1:2]),n=n,p=p)
+
+# There also seems to be some strange behaviour with the limadj values
+# Center = TRUE does not seem to be working right
+
 bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
                             xl = NULL, yl = NULL,
                             axes = TRUE, center = TRUE,
@@ -92,6 +102,7 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 
 }
 
+# There seems to be a problem with the limadj for the xl yl calculation
 eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, limadj, axes, center, ...){
   axis1 <- lengths[1]
   axis2 <- lengths[2]
