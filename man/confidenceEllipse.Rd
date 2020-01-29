@@ -28,7 +28,7 @@ alpha = 0.05,
   \item{axes}{logical. If \code{axes = TRUE} (default) then the major and minor axes of the ellipse are plotted.}
   \item{center}{logical. If \code{axes = TRUE} then the center of the ellipse is indicated with a point and dashed lines are drawn to the x-axis and y-axis.}
   \item{lim.adj}{a value giving an adjustment to the x-axis and y-axis limits computed if either \code{xl = NULL} or \code{yl = NULL}. Essentially this is a way to have some coarse control over these limits for quick graphing: positive values will increase the distance between the upper and lower limits (making the ellipse appear smaller) while negative values will decrease the distance (and make the ellipse appear larger).}
-  \item{alpha}{a value giving the value of alpha to be used when computing the contour. Contours are drawn at the \code{1-alpha}} level.
+  \item{alpha}{a value giving the value of alpha to be used when computing the contour. Contours are drawn at the \code{1-alpha} level.}
   \item{...}{other arguments to be passed to the graphing functions.}
 }
 

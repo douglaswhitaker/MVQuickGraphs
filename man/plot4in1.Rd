@@ -15,7 +15,7 @@ plot4in1(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=1.2, ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{out}{the output of the \code{\link[stats]{lm}} function (an object of class \code{"lm"}). The components of greatest importance from this object are \code{residuals} (perhaps passed to \code{rstandard} of \code{rstudent}, depending on \code{type}) and \code{fitted.values}.}
-  \item{type}{the type of residuals to be used. There are three possible values: \code{"Regular"}, \code{"Standardized"}, and \code{"Studentized"}. Using \code{type = "Regular"} results in untransformed residuals being used, \code{type = "Standardized"} uses standardized residuals (computed using \code{\link[stats]{rstandard}}), and \code{type = "Studentized"} uses externally studentized residuals (computed using \code{\link[stats]{rstudent}}).}
+  \item{type}{the type of residuals to be used. There are three possible values: \code{"Regular"}, \code{"Standardized"}, and \code{"Studentized"}. Using \code{type = "Regular"} results in untransformed residuals being used, \code{type = "Standardized"} uses standardized residuals (computed using \code{rstandard}), and \code{type = "Studentized"} uses externally studentized residuals (computed using \code{rstudent}).}
   \item{PP}{logical. If \code{PP = TRUE}, a Normal Percentile Plot (P-P Plot) is displayed in the top-left panel. If \code{PP = FALSE}, a Normal Quantile Plot (Q-Q Plot) is displayed in the top-left panel.}
   \item{pch}{symbol to be used in plotting. \code{pch = 19} is a filled circle (see \code{\link[graphics]{par}}).}
   \item{col}{color of symbol specified in \code{pch} to be used in graphing. The default is \code{"steelblue"} (see \code{\link[graphics]{par}}).}
@@ -48,7 +48,7 @@ plot4in1(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=1.2, ...)
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link[stats]{influence.measures}} for more information about standardized and studentized residuals; \code{\link[stats]{qqnorm}} for more information about the Quantile-Quanitle (Q-Q) plot; \code{\link[graphics]{par}} for information about the graphical parameters.
+\code{\link[stats]{influence.measures}} for more information about standardized (\code{rstandard}) and studentized (\code{rstudent}) residuals; \code{\link[stats]{qqnorm}} for more information about the Quantile-Quanitle (Q-Q) plot; \code{\link[graphics]{par}} for information about the graphical parameters.
 }
 \examples{
 out <- lm(Girth ~ Volume, data = trees)
