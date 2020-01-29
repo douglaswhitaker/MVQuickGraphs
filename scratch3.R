@@ -26,3 +26,16 @@ pprint <- function(..., sep="", innersep=" ", outersep1="'", outersep2="'"){
 # Is there really an advantage to this over something like
 print(paste(c("Testing",1:10,"More testing"),collapse=" "))
 pprint("Testing ",1:10," More testing")
+pprint("Testing ",1:10," More testing",outersep1="[",outersep2 = "]")
+
+# > pprint(matrix(1:12,ncol=3))
+# [1] "'1 2 3 4 5 6 7 8 9 10 11 12'"
+# > print(matrix(1:12,ncol=3))
+# [,1] [,2] [,3]
+# [1,]    1    5    9
+# [2,]    2    6   10
+# [3,]    3    7   11
+# [4,]    4    8   12
+# >
+
+# Maybe have pprint be smart about what it prints? That is, detect a matrix and print it on a new line, detect a list and skip over it, etc.?
