@@ -6,9 +6,14 @@
 # and the angle of rotation of the ellipse; these values are then passed to eigenEllipseHelper to actually draw
 # the ellipse.
 
-# To do: make an add=TRUE parameter (at least for bvNormalContour so that one can make a contour plot with a loop)
+# To do:
+# make an add=TRUE parameter (at least for bvNormalContour so that one can make a contour plot with a loop)
 # This might be easiest to just do by accepting a vector for alpha. Then, when it comes time to calculate lengths,
 # check the length of clevel and if > 1 just loop through the tail end of the function.
+#
+# change X.mean for confidenceEllipse, allow Sigma = for confidence ellipse
+#
+# perhaps add options to graph the length of the axes (labels). something like c/lambda_1 = value, near the corresponding axis
 
 # This functions graphs a confidence ellipse for mu based on the eigenvalues and eigenvectors for the covariance matrix S.
 confidenceEllipse <- function(X.mean = c(0,0),
