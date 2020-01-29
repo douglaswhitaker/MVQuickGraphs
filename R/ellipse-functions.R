@@ -18,7 +18,7 @@ confidenceEllipse <- function(X.mean = c(0,0),
                               xl = NULL, yl = NULL, # the x and y axis limits; calculated dynamically if not specified
                               axes = TRUE, # if TRUE, the major and minor axes of the ellipse are graphed
                               center = FALSE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
-                              lim.adj = 0, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
+                              lim.adj = 0.02, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
                               alpha = 0.05, # the alpha-level used to determine which ellipse is drawn
                               ...){
 

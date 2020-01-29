@@ -7,10 +7,10 @@ Bivariate Normal Contour Ellipse
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-Draws a contour of constant density at the (1-\code{alpha})100\% level for a bivariate normal distribution using the eigendecomposition of the covariance matrix.
+Draws a contour of constant density at the (1-\code{alpha})100\% level for a bivariate normal distribution using the eigendecomposition of the covariance matrix. This is likely more interesting for learning about the bivariate normal distribution than as a practical tool, for which other functions already exist (e.g. \code{link[graphics]{contour}}).
 }
 \usage{
-bvNormalContour(x)
+bvNormalContour(mu = c(0,0), Sigma=NULL, eig=NULL, xl = NULL, yl = NULL, axes = TRUE, center = FALSE, lim.adj = 0.02, alpha = 0.05, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,33 +28,33 @@ bvNormalContour(x)
 %                            axes = TRUE, center = FALSE,
 %                            lim.adj = 0.02, alpha = 0.05, ...
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
 
-}
-\value{
+%}
+%\value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-}
+%}
 \references{
 %% ~put references to the literature/web site here ~
 Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analysis (6th ed). Pearson Prentice Hall.
 }
-\author{
+%\author{
 %%  ~~who you are~~
-}
-\note{
+%}
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
+%\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+%}
 \examples{
 mu <- c(2,8)
 Sigma <- matrix(c(2,.9,.9,3), ncol = 2)

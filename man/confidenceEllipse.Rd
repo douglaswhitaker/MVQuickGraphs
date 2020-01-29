@@ -10,7 +10,7 @@ Bivariate Normal Confidence Ellipse
 Draws a (1-\code{alpha})100\% confidence ellipse (two dimensional) for a multivariate normal distribution using the eigendecomposition of the covariance matrix.
 }
 \usage{
-confidenceEllipse(x)
+confidenceEllipse(X.mean = c(0,0), eig, n, p, xl = NULL, yl = NULL, axes = TRUE, center = FALSE, lim.adj = 0.02 alpha = 0.05, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +24,7 @@ confidenceEllipse(x)
   \item{center}{logical. If \code{axes = TRUE} then the center of the ellipse is indicated with a point and dashed lines are drawn to the x-axis and y-axis.}
   \item{lim.adj}{a value giving an adjustment to the x-axis and y-axis limits computed if either \code{xl = NULL} or \code{yl = NULL}. Essentially this is a way to have some coarse control over these limits for quick graphing: positive values will increase the distance between the upper and lower limits (making the ellipse appear smaller) while negative values will decrease the distance (and make the ellipse appear larger).}
   \item{alpha}{a value giving the value of alpha to be used when computing the contour. Contours are drawn at the \code{1-alpha}} level.
-
+}
 
 %X.mean = c(0,0),
 %                              eig,
@@ -35,33 +35,33 @@ confidenceEllipse(x)
 %                              center = FALSE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
 %                              lim.adj = 0, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
 %                              alpha = 0.05,
-}
-\details{
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
-\value{
+%}
+%\value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-}
+%}
 \references{
 %% ~put references to the literature/web site here ~
 Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analysis (6th ed). Pearson Prentice Hall.
 }
-\author{
+%\author{
 %%  ~~who you are~~
-}
-\note{
+%}
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
+%\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+%}
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,
