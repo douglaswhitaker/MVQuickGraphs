@@ -7,22 +7,23 @@ Bivariate Normal Confidence Ellipse
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-Draws a (1-\code{alpha})100\% confidence ellipse for a bivariate normal distribution using the eigendecomposition of the covariance matrix.
+Draws a (1-\code{alpha})100\% confidence ellipse (two dimensional) for a multivariate normal distribution using the eigendecomposition of the covariance matrix.
 }
 \usage{
 confidenceEllipse(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{eig}{}
-  \item{n}{}
-  \item{p}{}
-  \item{xl}{}
-  \item{yl}{}
-  \item{axes}{}
-  \item{center}{}
-  \item{lim.adj}{}
-  \item{alpha}{}
+  \item{X.mean}{a column matrix giving the mean of the two dimensions of the p-dimensional multivariate normal distribution.}
+  \item{eig}{the eigenvalues and eigenvectors of the covariance matrix. This should be of the same form as the output of \code{\link{eigen}}, namely a list with two components: \code{values} and \code{vectors}. It is assumed that the largest eigenvalue is given first.}
+  \item{n}{the number of observations.}
+  \item{p}{the number of dimensions of the multivariate normal distribution. (The resulting graph will always be a two-dimensional confidence region for the two dimensions of a p-dimensional multivaraite normal distribution under consideration.)}
+  \item{xl}{a vector giving the lower and upper limits of the x-axis for plotting. If \code{xl = NULL} (default), then reasonable values are computed automatically.}
+  \item{yl}{a vector giving the lower and upper limits of the y-axis for plotting. If \code{yl = NULL} (default), then reasonable values are computed automatically.}
+  \item{axes}{logical. If \code{axes = TRUE} (default) then the major and minor axes of the ellipse are plotted.}
+  \item{center}{logical. If \code{axes = TRUE} then the center of the ellipse is indicated with a point and dashed lines are drawn to the x-axis and y-axis.}
+  \item{lim.adj}{a value giving an adjustment to the x-axis and y-axis limits computed if either \code{xl = NULL} or \code{yl = NULL}. Essentially this is a way to have some coarse control over these limits for quick graphing: positive values will increase the distance between the upper and lower limits (making the ellipse appear smaller) while negative values will decrease the distance (and make the ellipse appear larger).}
+  \item{alpha}{a value giving the value of alpha to be used when computing the contour. Contours are drawn at the \code{1-alpha}} level.
 
 
 %X.mean = c(0,0),
@@ -47,6 +48,7 @@ confidenceEllipse(x)
 }
 \references{
 %% ~put references to the literature/web site here ~
+Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analysis (6th ed). Pearson Prentice Hall.
 }
 \author{
 %%  ~~who you are~~
@@ -72,5 +74,5 @@ function (x)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ hplot }% use one of  RShowDoc("KEYWORDS")
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
