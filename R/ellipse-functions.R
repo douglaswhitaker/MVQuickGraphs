@@ -13,8 +13,8 @@ confidenceEllipse <- function(X.mean = c(0,0),
                               p,
                               xl = NULL, yl = NULL, # the x and y axis limits; calculated dynamically if not specified
                               axes = TRUE, # if TRUE, the major and minor axes of the ellipse are graphed
-                              center = TRUE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
-                              limadj = 0.02, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
+                              center = FALSE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
+                              lim.adj = 0, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
                               alpha = 0.05, # the alpha-level used to determine which ellipse is drawn
                               ...){
 
@@ -50,7 +50,7 @@ confidenceEllipse <- function(X.mean = c(0,0),
   eigenEllipseHelper(mu = X.mean, lengths = lengths, angle = angle,
                      xl = xl, yl = yl,
                      axes = axes, center = center,
-                     limadj = limadj, ...)
+                     lim.adj = lim.adj, ...)
 }
 
 # This is a work in progress! Need to convert this example to a function.
@@ -58,17 +58,17 @@ confidenceEllipse <- function(X.mean = c(0,0),
 # 2020-01-26 There seems to be a problem with the way the xl and yl are being determined:
 # Using the ex5.7 values, run these lines:
 
-# bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]), limadj =0.2)
+# bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]), lim.adj =0.2)
 # bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]))
 # bvNormalContour(mu=x.bar[2:3,1],eig=eigen(S[1:2,1:2]),n=n,p=p)
 
-# There also seems to be some strange behaviour with the limadj values
+# There also seems to be some strange behaviour with the lim.adj values
 # Center = TRUE does not seem to be working right
 
 bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
                             xl = NULL, yl = NULL,
-                            axes = TRUE, center = TRUE,
-                            limadj = 0.02, alpha = 0.05, ...){
+                            axes = TRUE, center = FALSE,
+                            lim.adj = 0.02, alpha = 0.05, ...){
 
   # eigenEllipseHelper is expecting a matrix... might be better to eventually change that
   mu <- matrix(mu, ncol=1)
@@ -93,7 +93,7 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
   eigenEllipseHelper(mu = mu, lengths = lengths, angle = angle,
                      xl = xl, yl = yl,
                      axes = axes, center = center,
-                     limadj = limadj, ...)
+                     lim.adj = lim.adj, ...)
 
   # plot(0,pch='',ylab='',xlab='',xlim=c(-5,5),ylim=c(-5,5))
   # draw.ellipse(x=mu[1],y=mu[2],
@@ -102,8 +102,8 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 
 }
 
-# There seems to be a problem with the limadj for the xl yl calculation
-eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, limadj, axes, center, debug=TRUE, ...){
+# There seems to be a problem with the lim.adj for the xl yl calculation
+eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, lim.adj, axes, center, ...){
   axis1 <- lengths[1]
   axis2 <- lengths[2]
 
@@ -116,71 +116,16 @@ eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, limadj, axes, center,
 
   # if no x limits are specified, calculate some that will ensure the entirety of the ellipse will fit on the x axis
   if (is.null(xl)){
-
-    if (debug){
-      print(paste("axis1:",axis1))
-      print(paste("axis2:",axis2))
-      print("")
-      print(paste("axis1.x:",axis1.x,"; axis1.y",axis1.y))
-      print(paste("axis2.x:",axis1.x,"; axis1.y",axis2.y))
-      print("")
-      print("x of mu:",mu[1,1])
-      print("")
-      print("Values for minimum")
-      print(mu[1,1] + axis1.x);print(mu[1,1] + axis1.x);print(mu[1,1] + axis2.x);print(mu[1,1] - axis2.x)
-    }
-
-    #diagonal.length = sqrt(axis1^2 + axis2^2 - (2 * axis1 * axis2 * cos(pi - angle)))
-    #xl1 = cos(angle) * diagonal.length
-    diagonal.length = axis2 + axis1*cos(angle)
-    # calculate the lower x limit by determining the minimum x value needed
-    # use the offsets from the mean calculated earlier
-    # xl1 <- min(mu[1,1] + axis1.x,
-    #            mu[1,1] + axis1.x,
-    #            mu[1,1] + axis2.x,
-    #            mu[1,1] - axis2.x)
-    # adjust the limit by the specified value
-    # larger values of limadj decrease the lower limit
-    #xl1 <- xl1 * (1 - limadj)
-
-    # I think diagonal.length may be negative
-    print(diagonal.length)
-    xl1 <- min(mu[1,1] - diagonal.length, mu[1,1] + diagonal.length)
-
-    # calculate the upper x limit
-    # using the same set of offsets from the mean, determine the largest value needed
-    xl2 <- max(mu[1,1] + axis1.x,
-               mu[1,1] - axis1.x,
-               mu[1,1] + axis2.x,
-               mu[1,1] - axis2.x)
-    # adjust the limit by the specified value
-    # larger values of limadj increase the upper limit
-    xl2 <- xl2 * (1 + limadj)
-    xl <- c(xl1,xl2)
+    xl1 <- mu[1,1] - abs(axis1.x) - abs(axis2.x)
+    xl2 <- mu[1,1] + abs(axis1.x) + abs(axis2.x)
+    xl <- c(xl1*(1-lim.adj),xl2*(1+lim.adj))
   }
 
   # if no y limits are specified, calculate some that will ensure the entirety of the ellipse will fit on the y axis
   if (is.null(yl)){
-    # calculate the lower y limit by determining the minimum y value needed
-    # use the offsets from the mean calculated earlier
-    yl1 <- min(mu[2,1] + axis1.y,
-               mu[2,1] - axis1.y,
-               mu[2,1] + axis2.y,
-               mu[2,1] - axis2.y)
-    # adjust the limit by the specified value
-    # larger values of limadj decrease the lower limit
-    yl1 <- yl1 * (1 - limadj)
-
-    # calculate the upper y limit
-    # using the same set of offsets from the mean, determine the largest value needed
-    yl2 <- max(mu[2,1] + axis1.y,
-               mu[2,1] - axis1.y,
-               mu[2,1] + axis2.y,
-               mu[2,1] - axis2.y)
-    # adjust the limit by the specified value
-    # larger values of limadj increase the upper limit
-    yl2 <- yl2 * (1 + limadj)
-    yl <- c(yl1,yl2)
+    yl1 <- mu[2,1] - abs(axis1.y) - abs(axis2.y)
+    yl2 <- mu[2,1] + abs(axis1.y) + abs(axis2.y)
+    yl <- c(yl1*(1-lim.adj),yl2*(1+lim.adj))
   }
 
   # Call an empty graph that we can add the normal contour ellipseto
