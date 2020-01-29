@@ -23,6 +23,7 @@ bvNormalContour(mu = c(0,0), Sigma=NULL, eig=NULL, xl = NULL, yl = NULL, axes = 
   \item{center}{logical. If \code{axes = TRUE} then the center of the ellipse is indicated with a point and dashed lines are drawn to the x-axis and y-axis.}
   \item{lim.adj}{a value giving an adjustment to the x-axis and y-axis limits computed if either \code{xl = NULL} or \code{yl = NULL}. Essentially this is a way to have some coarse control over these limits for quick graphing: positive values will increase the distance between the upper and lower limits (making the ellipse appear smaller) while negative values will decrease the distance (and make the ellipse appear larger).}
   \item{alpha}{a value giving the value of alpha to be used when computing the contour. Contours are drawn at the \code{1-alpha}} level.
+  \item{...}{other arguments to be passed to the graphing functions.}
 %mu = c(0,0), Sigma=NULL, eig=NULL,
 %                            xl = NULL, yl = NULL,
 %                            axes = TRUE, center = FALSE,
@@ -55,11 +56,12 @@ Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analys
 %\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
-\examples{
+\examples{\dontrun{
 mu <- c(2,8)
 Sigma <- matrix(c(2,.9,.9,3), ncol = 2)
 # Draw a 90\% contour
 bvNormalContour(mu = mu, Sigma = Sigma, alpha = 0.10)
+}}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ hplot }% use one of  RShowDoc("KEYWORDS")

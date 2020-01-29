@@ -11,10 +11,7 @@
 # check the length of clevel and if > 1 just loop through the tail end of the function.
 
 # This functions graphs a confidence ellipse for mu based on the eigenvalues and eigenvectors for the covariance matrix S.
-confidenceEllipse <- function(X.mean = c(0,0),
-                              eig,
-                              n,
-                              p,
+confidenceEllipse <- function(X.mean = c(0,0), eig, n, p,
                               xl = NULL, yl = NULL, # the x and y axis limits; calculated dynamically if not specified
                               axes = TRUE, # if TRUE, the major and minor axes of the ellipse are graphed
                               center = FALSE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
