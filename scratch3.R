@@ -45,3 +45,14 @@ pprint("Testing ",1:10," More testing",outersep1="[",outersep2 = "]")
 # x <- 5
 # pprint("The value was ",x)
 # output: The value was x = 5 (identifies the variable name automatically)
+#
+# A few websites to look at:
+# https://stackoverflow.com/questions/39496333/r-get-names-of-arguments-passed-in
+# https://stat.ethz.ch/pipermail/r-help/2010-September/252840.html
+
+# Another expansion might be this:
+# Specify the character and number of times it should be repeated at the beginning and end of output, e.g.
+# pprint("The value was ",x,char="#",char.rep=10, char.beginning = TRUE, char.end = FALSE)
+# output:
+# ##########
+# "The value was 5"
