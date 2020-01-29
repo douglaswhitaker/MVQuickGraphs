@@ -3,9 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
+Plot 4-in-1
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Generates a 2x2 panel graph including four residual diagnostic plots as is popular in some other statistics packages.
 }
 \usage{
 plot4in1(x)

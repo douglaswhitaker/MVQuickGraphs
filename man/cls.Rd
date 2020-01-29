@@ -3,9 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
+CLear Screen
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+A function that essentially just passes \code{Ctrl+L} to the console.
 }
 \usage{
 cls(x)

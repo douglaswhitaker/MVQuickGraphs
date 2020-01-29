@@ -3,9 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
+Bivariate Normal Confidence Ellipse
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Draws a (1-\code{alpha})100\% confidence ellipse for a bivariate normal distribution using the eigendecomposition of the covariance matrix.
 }
 \usage{
 confidenceEllipse(x)

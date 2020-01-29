@@ -3,9 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
+Bivariate Normal Contour Ellipse
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Draws a contour of constant density at the (1-\code{alpha})100\% level for a bivariate normal distribution using the eigendecomposition of the covariance matrix.
 }
 \usage{
 bvNormalContour(x)
