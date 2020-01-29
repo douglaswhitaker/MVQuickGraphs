@@ -1,3 +1,5 @@
+importFrom("graphics", "abline", "hist", "par", "plot", "points", "segments")
+importFrom("stats", "pnorm", "ppoints", "qchisq", "qf", "qqline", "qqnorm", "rstandard", "rstudent")
 exportPattern("^[[:alpha:]]+")
 export(plot4in1)
 export(bvNormalContour)

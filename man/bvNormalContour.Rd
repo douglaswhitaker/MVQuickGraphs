@@ -64,5 +64,5 @@ bvNormalContour(mu = mu, Sigma = Sigma, alpha = 0.10)
 }}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ hplot }% use one of  RShowDoc("KEYWORDS")
+%\keyword{ hplot }% use one of  RShowDoc("KEYWORDS")
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

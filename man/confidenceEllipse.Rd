@@ -13,7 +13,7 @@ Draws a (1-\code{alpha})100\% confidence ellipse (two dimensional) for a multiva
 confidenceEllipse(X.mean = c(0,0), eig, n, p,
 xl = NULL, yl = NULL,
 axes = TRUE, center = FALSE,
-lim.adj = 0.02
+lim.adj = 0.02,
 alpha = 0.05,
 ...)
 }
@@ -80,5 +80,5 @@ Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analys
 %}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ hplot }% use one of  RShowDoc("KEYWORDS")
+%\keyword{ hplot }% use one of  RShowDoc("KEYWORDS")
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

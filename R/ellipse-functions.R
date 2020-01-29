@@ -12,11 +12,11 @@
 
 # This functions graphs a confidence ellipse for mu based on the eigenvalues and eigenvectors for the covariance matrix S.
 confidenceEllipse <- function(X.mean = c(0,0), eig, n, p,
-                              xl = NULL, yl = NULL, # the x and y axis limits; calculated dynamically if not specified
-                              axes = TRUE, # if TRUE, the major and minor axes of the ellipse are graphed
-                              center = FALSE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
-                              lim.adj = 0.02, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
-                              alpha = 0.05, # the alpha-level used to determine which ellipse is drawn
+                              xl = NULL, yl = NULL,
+                              axes = TRUE,
+                              center = FALSE,
+                              lim.adj = 0.02,
+                              alpha = 0.05,
                               ...){
 
   # eigenEllipseHelper is expecting a matrix... might be better to eventually change that
@@ -116,7 +116,7 @@ eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, lim.adj, axes, center
 
   # draw the ellipse
   # draw.ellipse is from package plotrix
-  draw.ellipse(x = mu[1,1], y = mu[2,1], # center of the ellipse
+  plotrix::draw.ellipse(x = mu[1,1], y = mu[2,1], # center of the ellipse
                a = lengths[1], b = lengths[2], # major and minor axis half-lengths
                angle = angle, deg = FALSE) # calculated angle earlier was in radians
 
