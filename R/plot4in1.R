@@ -14,7 +14,10 @@
 #       For zero reference line:    #CCCCCC
 #       For grid lines (QQ):        #F6F6F6
 #       Gray panel background:      #E5E5E5
-plot4in1 <- function(out, type="Regular", pch=19, col="steelblue3", cex=1.2, ...){
+#
+#
+
+plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=1.2, ...){
   par(mfrow = c(2,2)) # set up a 2x2 grid for plots
 
   if (type=="Regular") {
@@ -30,8 +33,21 @@ plot4in1 <- function(out, type="Regular", pch=19, col="steelblue3", cex=1.2, ...
   }
 
   # Q-Q Plot
-  qqnorm(res, pch=pch, col=col, cex=cex, ...)
-  qqline(res, col="red", ...)
+  if (!PP){
+    qqnorm(res, pch=pch, col=col, cex=cex, ...)
+    qqline(res, col="red", ...)
+  }
+  # P-P Plot
+  if (PP){
+    ps <- pnorm(res)
+    plot(x = ppoints(length(res)),
+         y = sort(ps),
+         main = "Normal Probability Plot",
+         xlab = ifelse(type=="Regular","Residual",paste(type,"Residual")),
+         ylab = "Percent", ,
+         pch = pch, col = col, cex = cex, ...)
+    abline(0, 1, col = "red", ...)
+  }
 
   # Versus Fits
   plot(x=out$fitted.values,y=res,

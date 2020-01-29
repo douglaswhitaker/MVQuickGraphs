@@ -1,11 +1,13 @@
 
 
+# Essentially, this file contains three functions (two exported, one internal).
+# confidenceEllipse and bvNormalContour both take the eigen decomposition of a (covariance) matrix to plot
+# the appropriate ellipse. These functions calculate the appropriate lengths of the major and minor axes
+# and the angle of rotation of the ellipse; these values are then passed to eigenEllipseHelper to actually draw
+# the ellipse.
 
+# To do: make an add=TRUE parameter (at least for bvNormalContour so that one can make a contour plot with a loop)
 
-# this will be moved to the DESCRIPTION file
-require(plotrix)
-
-# Need to split this into two functions so we can make one for bvNormalContours that recycles the ellipse calculations.
 # This functions graphs a confidence ellipse for mu based on the eigenvalues and eigenvectors for the covariance matrix S.
 confidenceEllipse <- function(X.mean = c(0,0),
                               eig,
@@ -53,18 +55,6 @@ confidenceEllipse <- function(X.mean = c(0,0),
                      lim.adj = lim.adj, ...)
 }
 
-# This is a work in progress! Need to convert this example to a function.
-# Resume working here.
-# 2020-01-26 There seems to be a problem with the way the xl and yl are being determined:
-# Using the ex5.7 values, run these lines:
-
-# bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]), lim.adj =0.2)
-# bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]))
-# bvNormalContour(mu=x.bar[2:3,1],eig=eigen(S[1:2,1:2]),n=n,p=p)
-
-# There also seems to be some strange behaviour with the lim.adj values
-# Center = TRUE does not seem to be working right
-
 bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
                             xl = NULL, yl = NULL,
                             axes = TRUE, center = FALSE,
@@ -86,20 +76,12 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
   # The half-lengths are c*sqrt(lambda_i); the eigenvectors determine the angle
   #lengths <- c(clevel * sqrt(s11+s12),clevel*sqrt(s11-s12))
   lengths <- c(clevel * sqrt(eig$values[1]), clevel * sqrt(eig$values[2]))
-
-  # We should call an ellipse function here, passing the calculated lengths to it and have it dynamically generate xl and yl
   angle <- atan(eig$vectors[2,1]/eig$vectors[1,1]) # sohcahtoa
 
   eigenEllipseHelper(mu = mu, lengths = lengths, angle = angle,
                      xl = xl, yl = yl,
                      axes = axes, center = center,
                      lim.adj = lim.adj, ...)
-
-  # plot(0,pch='',ylab='',xlab='',xlim=c(-5,5),ylim=c(-5,5))
-  # draw.ellipse(x=mu[1],y=mu[2],
-  #              a=lengths[1],b=lengths[2],
-  #              angle=angle,deg=FALSE)
-
 }
 
 # There seems to be a problem with the lim.adj for the xl yl calculation
