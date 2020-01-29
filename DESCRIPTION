@@ -1,12 +1,13 @@
 Package: DWmisc
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Douglas Whitaker's Miscellaneous Functions
 Version: 0.1.0
 Author: Douglas Whitaker
 Maintainer: Douglas Whitaker <douglas.whitaker@msvu.ca>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: This package contains functions I've written that might be of 
+    interest to others. Right now it only includes graphing functions written
+    for courses I've taught. 
+License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:

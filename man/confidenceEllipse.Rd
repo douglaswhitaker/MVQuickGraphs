@@ -14,9 +14,26 @@ confidenceEllipse(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
-}
+  \item{eig}{}
+  \item{n}{}
+  \item{p}{}
+  \item{xl}{}
+  \item{yl}{}
+  \item{axes}{}
+  \item{center}{}
+  \item{lim.adj}{}
+  \item{alpha}{}
+
+
+%X.mean = c(0,0),
+%                              eig,
+%                              n,
+%                              p,
+%                              xl = NULL, yl = NULL, # the x and y axis limits; calculated dynamically if not specified
+%                              axes = TRUE, # if TRUE, the major and minor axes of the ellipse are graphed
+%                              center = FALSE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
+%                              lim.adj = 0, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
+%                              alpha = 0.05,
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~

@@ -1,1 +1,4 @@
 exportPattern("^[[:alpha:]]+")
+export(plot4in1)
+export(bvNormalContour)
+export(confidenceEllipse)

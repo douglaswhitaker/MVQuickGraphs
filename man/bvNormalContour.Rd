@@ -14,9 +14,19 @@ bvNormalContour(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
-}
+  \item{mu}{}
+  \item{Sigma}{}
+  \item{eig}{}
+  \item{xl}{}
+  \item{yl}{}
+  \item{axes}{}
+  \item{center}{}
+  \item{lim.adj}{}
+  \item{alpha}{}
+%mu = c(0,0), Sigma=NULL, eig=NULL,
+%                            xl = NULL, yl = NULL,
+%                            axes = TRUE, center = FALSE,
+%                            lim.adj = 0.02, alpha = 0.05, ...
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
