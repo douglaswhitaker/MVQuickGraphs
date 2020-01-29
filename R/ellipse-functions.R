@@ -103,7 +103,7 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 }
 
 # There seems to be a problem with the limadj for the xl yl calculation
-eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, limadj, axes, center, ...){
+eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, limadj, axes, center, debug=TRUE, ...){
   axis1 <- lengths[1]
   axis2 <- lengths[2]
 
@@ -116,15 +116,36 @@ eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, limadj, axes, center,
 
   # if no x limits are specified, calculate some that will ensure the entirety of the ellipse will fit on the x axis
   if (is.null(xl)){
+
+    if (debug){
+      print(paste("axis1:",axis1))
+      print(paste("axis2:",axis2))
+      print("")
+      print(paste("axis1.x:",axis1.x,"; axis1.y",axis1.y))
+      print(paste("axis2.x:",axis1.x,"; axis1.y",axis2.y))
+      print("")
+      print("x of mu:",mu[1,1])
+      print("")
+      print("Values for minimum")
+      print(mu[1,1] + axis1.x);print(mu[1,1] + axis1.x);print(mu[1,1] + axis2.x);print(mu[1,1] - axis2.x)
+    }
+
+    #diagonal.length = sqrt(axis1^2 + axis2^2 - (2 * axis1 * axis2 * cos(pi - angle)))
+    #xl1 = cos(angle) * diagonal.length
+    diagonal.length = axis2 + axis1*cos(angle)
     # calculate the lower x limit by determining the minimum x value needed
     # use the offsets from the mean calculated earlier
-    xl1 <- min(mu[1,1] + axis1.x,
-               mu[1,1] - axis1.x,
-               mu[1,1] + axis2.x,
-               mu[1,1] - axis2.x)
+    # xl1 <- min(mu[1,1] + axis1.x,
+    #            mu[1,1] + axis1.x,
+    #            mu[1,1] + axis2.x,
+    #            mu[1,1] - axis2.x)
     # adjust the limit by the specified value
     # larger values of limadj decrease the lower limit
-    xl1 <- xl1 * (1 - limadj)
+    #xl1 <- xl1 * (1 - limadj)
+
+    # I think diagonal.length may be negative
+    print(diagonal.length)
+    xl1 <- min(mu[1,1] - diagonal.length, mu[1,1] + diagonal.length)
 
     # calculate the upper x limit
     # using the same set of offsets from the mean, determine the largest value needed
