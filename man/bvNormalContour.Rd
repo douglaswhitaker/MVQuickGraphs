@@ -10,7 +10,8 @@ Bivariate Normal Contour Ellipse
 Draws a contour of constant density at the (1-\code{alpha})100\% level for a bivariate normal distribution using the eigendecomposition of the covariance matrix. This is likely more interesting for learning about the bivariate normal distribution than as a practical tool, for which other functions already exist (e.g. \code{link[graphics]{contour}}).
 }
 \usage{
-bvNormalContour(mu = c(0,0), Sigma=NULL, eig=NULL, xl = NULL, yl = NULL, axes = TRUE, center = FALSE, lim.adj = 0.02, alpha = 0.05, ...)
+bvNormalContour(mu = c(0,0), Sigma=NULL, eig=NULL, xl = NULL, yl = NULL,
+axes = TRUE, center = FALSE, lim.adj = 0.02, alpha = 0.05, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
