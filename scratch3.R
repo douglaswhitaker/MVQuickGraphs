@@ -39,3 +39,9 @@ pprint("Testing ",1:10," More testing",outersep1="[",outersep2 = "]")
 # >
 
 # Maybe have pprint be smart about what it prints? That is, detect a matrix and print it on a new line, detect a list and skip over it, etc.?
+# Need to have the ability to detect and respond to many different object types
+
+# Another possibility might look like this (desired outcome, not sure quite how to do it yet)
+# x <- 5
+# pprint("The value was ",x)
+# output: The value was x = 5 (identifies the variable name automatically)

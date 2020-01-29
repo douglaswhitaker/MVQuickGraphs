@@ -7,6 +7,8 @@
 # the ellipse.
 
 # To do: make an add=TRUE parameter (at least for bvNormalContour so that one can make a contour plot with a loop)
+# This might be easiest to just do by accepting a vector for alpha. Then, when it comes time to calculate lengths,
+# check the length of clevel and if > 1 just loop through the tail end of the function.
 
 # This functions graphs a confidence ellipse for mu based on the eigenvalues and eigenvectors for the covariance matrix S.
 confidenceEllipse <- function(X.mean = c(0,0),
@@ -78,6 +80,7 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
   lengths <- c(clevel * sqrt(eig$values[1]), clevel * sqrt(eig$values[2]))
   angle <- atan(eig$vectors[2,1]/eig$vectors[1,1]) # sohcahtoa
 
+  # Given the center, axis lengths, and angle of rotation, draw the ellipse.
   eigenEllipseHelper(mu = mu, lengths = lengths, angle = angle,
                      xl = xl, yl = yl,
                      axes = axes, center = center,
@@ -90,7 +93,8 @@ eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, lim.adj, axes, center
   axis2 <- lengths[2]
 
   # Calculate x and y components for each axis.
-  # We will use these to determine position from the origin (mean) later.
+  # These are used if xl or y1 is NULL or if center = TRUE
+
   axis1.x <- cos(angle) * axis1
   axis1.y <- sin(angle) * axis1
   axis2.x <- cos(angle + pi / 2) * axis2

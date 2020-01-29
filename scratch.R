@@ -38,7 +38,7 @@ bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]),n=n,p=p)
 bvNormalContour(mu=x.bar[1:2,1],eig=eigen(S[1:2,1:2]), limadj = 0.7)
 
 
-
+library(plotrix)
 e1 <- matrix(c(1/sqrt(2),1/sqrt(2)),ncol=1)
 e2 <- matrix(c(1/sqrt(2),-1/sqrt(2)),ncol=1)
 
