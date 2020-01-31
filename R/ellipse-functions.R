@@ -6,17 +6,25 @@
 # and the angle of rotation of the ellipse; these values are then passed to eigenEllipseHelper to actually draw
 # the ellipse.
 
-# To do: make an add=TRUE parameter (at least for bvNormalContour so that one can make a contour plot with a loop)
+# To do:
+# make an add=TRUE parameter (at least for bvNormalContour so that one can make a contour plot with a loop)
 # This might be easiest to just do by accepting a vector for alpha. Then, when it comes time to calculate lengths,
 # check the length of clevel and if > 1 just loop through the tail end of the function.
+#
+# change X.mean for confidenceEllipse, allow Sigma = for confidence ellipse
+#
+# perhaps add options to graph the length of the axes (labels). something like c/lambda_1 = value, near the corresponding axis
 
 # This functions graphs a confidence ellipse for mu based on the eigenvalues and eigenvectors for the covariance matrix S.
-confidenceEllipse <- function(X.mean = c(0,0), eig, n, p,
-                              xl = NULL, yl = NULL,
-                              axes = TRUE,
-                              center = FALSE,
-                              lim.adj = 0.02,
-                              alpha = 0.05,
+confidenceEllipse <- function(X.mean = c(0,0),
+                              eig,
+                              n,
+                              p,
+                              xl = NULL, yl = NULL, # the x and y axis limits; calculated dynamically if not specified
+                              axes = TRUE, # if TRUE, the major and minor axes of the ellipse are graphed
+                              center = FALSE, # if TRUE, a dot at the center of the ellipse and dashed lines to the axes are shown
+                              lim.adj = 0.02, # an axis adjustment factor used if xl or yl is NULL (to adjust the calculated limits)
+                              alpha = 0.05, # the alpha-level used to determine which ellipse is drawn
                               ...){
 
   # eigenEllipseHelper is expecting a matrix... might be better to eventually change that
