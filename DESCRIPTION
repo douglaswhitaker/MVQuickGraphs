@@ -1,12 +1,14 @@
-Package: DWmisc
+Package: MVQuickGraphs
 Type: Package
-Title: Douglas Whitaker's Miscellaneous Functions
+Title: Quick Multivariate Graphs
 Version: 0.1.0
 Author: Douglas Whitaker
 Maintainer: Douglas Whitaker <douglas.whitaker@msvu.ca>
-Description: This package contains functions I've written that might be of 
-    interest to others. Right now it only includes graphing functions written
-    for courses I've taught. 
+Description: Functions used for graphing in multivariate contexts. These 
+    functions are designed to support produce reasonable graphs with minimal 
+    input of graphing parameters. The motivation for these functions was to 
+    support students learning multivariate concepts and R - there may be 
+    other functions and packages better-suited to practical data analysis.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
