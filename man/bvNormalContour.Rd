@@ -57,12 +57,12 @@ Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analys
 %\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
-\examples{\dontrun{
-mu <- c(2,8)
-Sigma <- matrix(c(2,.9,.9,3), ncol = 2)
+\examples{
+mu <- c(-1,8)
+Sigma <- matrix(c(3,2,2,4), ncol = 2)
 # Draw a 90\% contour
 bvNormalContour(mu = mu, Sigma = Sigma, alpha = 0.10)
-}}
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 %\keyword{ hplot }% use one of  RShowDoc("KEYWORDS")

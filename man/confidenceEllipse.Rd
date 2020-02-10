@@ -68,16 +68,18 @@ Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analys
 %\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
-%\examples{
-%##---- Should be DIRECTLY executable !! ----
-%##-- ==>  Define data, use random,
-%##--	or do  help(data=index)  for the standard data sets.
-%
-%## The function is currently defined as
-%function (x)
-%{
-%  }
-%}
+\examples{
+# 90\% Confidence Ellipse for Reading and Vocab from ability.cov
+x.bar <- ability.cov$center[5:6]
+Sigma <- ability.cov$cov[5:6,5:6]
+n <- ability.cov$n.obs
+p <- length(ability.cov$center)
+
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen(Sigma),
+                  n = n, p = p,
+                  alpha = 0.10)
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 %\keyword{ hplot }% use one of  RShowDoc("KEYWORDS")
