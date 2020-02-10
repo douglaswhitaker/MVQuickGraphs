@@ -18,6 +18,10 @@
 #
 
 plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=1.2, ...){
+  # Because we change the user's par:
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
+
   par(mfrow = c(2,2)) # set up a 2x2 grid for plots
 
   if (type=="Regular") {
@@ -76,6 +80,4 @@ plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=
        ylab=paste(type,"Residuals"),
        main="Versus Order", ...)
   abline(h=0, lty=2, ...)
-
-  par(mfrow = c(1,1)) # return to default
 }
