@@ -46,6 +46,7 @@ plot4in1(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=1.2, ...)
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
+\value{None}
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 \code{\link[stats]{influence.measures}} for more information about standardized (\code{rstandard}) and studentized (\code{rstudent}) residuals; \code{\link[stats]{qqnorm}} for more information about the Quantile-Quanitle (Q-Q) plot; \code{\link[graphics]{par}} for information about the graphical parameters.

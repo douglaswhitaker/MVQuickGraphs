@@ -41,6 +41,7 @@ axes = TRUE, center = FALSE, lim.adj = 0.02, alpha = 0.05, ...)
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 %}
+\value{None}
 \references{
 %% ~put references to the literature/web site here ~
 Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate statistical analysis (6th ed). Pearson Prentice Hall.

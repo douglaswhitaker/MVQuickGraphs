@@ -51,6 +51,7 @@ logical. If \code{axes = TRUE} then the center of the ellipse is indicated with 
 other arguments to be passed to the graphing functions.
 }
 }
+\value{None}
 %\details{
 %%  ~~ If necessary, more details than the description above ~~
 %}
