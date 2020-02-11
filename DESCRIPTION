@@ -1,7 +1,7 @@
 Package: MVQuickGraphs
 Type: Package
 Title: Quick Multivariate Graphs
-Version: 0.1.0
+Version: 0.1.1
 Author: Douglas Whitaker
 Maintainer: Douglas Whitaker <douglas.whitaker@msvu.ca>
 Description: Functions used for graphing in multivariate contexts. These 
