@@ -1,0 +1,2 @@
+To do:
+  https://www.probabilitycourse.com/chapter5/5_1_1_joint_pmf.php
