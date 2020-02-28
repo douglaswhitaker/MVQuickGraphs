@@ -1,2 +1,5 @@
 To do:
-  https://www.probabilitycourse.com/chapter5/5_1_1_joint_pmf.php
+  Joint PMF plots
+    https://www.probabilitycourse.com/chapter5/5_1_1_joint_pmf.php
+  Check to see if Chernoff faces over time is easily supported in aplpack
+    (Johnson & Wichern example 1.13)
