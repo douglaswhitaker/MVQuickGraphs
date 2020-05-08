@@ -1,0 +1,7 @@
+Release Notes
+
+Version 0.1.3
+* Hotfix for typo in bvNormalContour (missed a square root, affecting results)
+
+Version 0.1.2
+First public release
