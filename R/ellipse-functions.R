@@ -16,14 +16,13 @@
 # This functions graphs a confidence ellipse for mu based on the eigenvalues and eigenvectors for the covariance matrix S.
 
 
-#' %% ~~function to do ... ~~ Bivariate Normal Confidence Ellipse
-#' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~ Draws
-#' a (1-\code{alpha})100\% confidence ellipse (two dimensional) for a
+#' Bivariate Normal Confidence Ellipse
+#'
+#' Draws a (1-\code{alpha})100\% confidence ellipse (two dimensional) for a
 #' multivariate normal distribution using the eigendecomposition of the
 #' covariance matrix.
-#' 
-#' 
+#'
+#'
 #' @param X.mean a column matrix giving the mean of the two dimensions of the
 #' p-dimensional multivariate normal distribution.
 #' @param eig the eigenvalues and eigenvectors of the covariance matrix. This
@@ -56,22 +55,21 @@
 #' contour. Contours are drawn at the \code{1-alpha} level.
 #' @param ... other arguments to be passed to the graphing functions.
 #' @return None
-#' @references %% ~put references to the literature/web site here ~ Johnson, R.
-#' A., & Wichern, D. W. (2007). Applied multivariate statistical analysis (6th
-#' ed). Pearson Prentice Hall.
+#' @references Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate
+#' statistical analysis (6th ed). Pearson Prentice Hall.
 #' @examples
-#' 
+#'
 #' # 90% Confidence Ellipse for Reading and Vocab from ability.cov
 #' x.bar <- ability.cov$center[5:6]
 #' Sigma <- ability.cov$cov[5:6,5:6]
 #' n <- ability.cov$n.obs
 #' p <- length(ability.cov$center)
-#' 
+#'
 #' confidenceEllipse(X.mean = x.bar,
 #'                   eig = eigen(Sigma),
 #'                   n = n, p = p,
 #'                   alpha = 0.10)
-#' 
+#'
 #' @export confidenceEllipse
 confidenceEllipse <- function(X.mean = c(0,0),
                               eig,
@@ -121,16 +119,15 @@ confidenceEllipse <- function(X.mean = c(0,0),
 
 
 
-#' %% ~~function to do ... ~~ Bivariate Normal Contour Ellipse
-#' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~ Draws
-#' a contour of constant density at the (1-\code{alpha})100\% level for a
+#' Bivariate Normal Contour Ellipse
+#'
+#' Draws a contour of constant density at the (1-\code{alpha})100\% level for a
 #' bivariate normal distribution using the eigendecomposition of the covariance
 #' matrix. This is likely more interesting for learning about the bivariate
 #' normal distribution than as a practical tool, for which other functions
 #' already exist (e.g. \code{link[graphics]{contour}}).
-#' 
-#' 
+#'
+#'
 #' @param mu a vector giving the mean of the bivariate normal distribution.
 #' This is the center of the ellipse.
 #' @param Sigma a matrix giving the covariance matrix of the bivariate normal
@@ -161,16 +158,15 @@ confidenceEllipse <- function(X.mean = c(0,0),
 #' contour. Contours are drawn at the \code{1-alpha} level.
 #' @param ... other arguments to be passed to the graphing functions.
 #' @return None
-#' @references %% ~put references to the literature/web site here ~ Johnson, R.
-#' A., & Wichern, D. W. (2007). Applied multivariate statistical analysis (6th
-#' ed). Pearson Prentice Hall.
+#' @references Johnson, R. A., & Wichern, D. W. (2007). Applied multivariate
+#' statistical analysis (6th ed). Pearson Prentice Hall.
 #' @examples
-#' 
+#'
 #' mu <- c(-1,8)
 #' Sigma <- matrix(c(3,2,2,4), ncol = 2)
 #' # Draw a 90% contour
 #' bvNormalContour(mu = mu, Sigma = Sigma, alpha = 0.10)
-#' 
+#'
 #' @export bvNormalContour
 bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
                             xl = NULL, yl = NULL,
@@ -205,18 +201,17 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 # There seems to be a problem with the lim.adj for the xl yl calculation
 
 
-#' %% ~~function to do ... ~~ Helper Function for other
+#' Helper Function for other
 #' Ellipse-from-Eigendecomposition Functions
-#' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~ Helper
-#' function for graphing ellipses from eigendecompositions. This function is
-#' used by \code{\link{bvNormalContour}} and \code{\link{confidenceEllipse}}.
+#'
+#' Helper function for graphing ellipses from eigendecompositions. This function
+#' is used by \code{\link{bvNormalContour}} and \code{\link{confidenceEllipse}}.
 #' Essentially this is a wrapper for \code{\link[plotrix]{draw.ellipse}} that
 #' also calculates appropriate x-axis and y-axis limits to make graphing an
 #' ellipse easier (because the entire ellipse should be visible without any
 #' work on the user's part to specify the limits).
-#' 
-#' 
+#'
+#'
 #' @param mu %% ~~Describe \code{mu} here~~ column matrix giving the
 #' coordinates for the cener of the ellipse.
 #' @param lengths %% ~~Describe \code{lengths} here~~ vector giving the major
@@ -232,9 +227,9 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 #' NULL} or \code{yl = NULL}.
 #' @param axes %% ~~Describe \code{axes} here~~ logical. If \code{axes = TRUE},
 #' then the major and minor axes are graphed.
-#' @param center %% ~~Describe \code{center} here~~ logical. If \code{axes =
-#' TRUE} then the center of the ellipse is indicated with a point and dashed
-#' lines are drawn to the x-axis and y-axis.
+#' @param center %% ~~Describe \code{center} here~~ logical. If
+#' \code{axes = TRUE} then the center of the ellipse is indicated with a point
+#' and dashed lines are drawn to the x-axis and y-axis.
 #' @param \dots %% ~~Describe \code{\dots} here~~ other arguments to be passed
 #' to the graphing functions.
 #' @return None
