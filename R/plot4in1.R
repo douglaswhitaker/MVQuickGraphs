@@ -19,23 +19,21 @@
 
 
 
-#' %% ~~function to do ... ~~ Plot 4-in-1
-#' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Plot 4-in-1
+#'
 #' Generates a 2x2 panel graph including four residual diagnostic plots as is
 #' popular in some other statistics packages. This was initially written to
 #' support students learning R for the first time in a regression modeling
 #' course. \code{plot4in1} generates four commonly-used residual diagnostic
 #' plots that can be used to assess the linear regression assumptions and
 #' ensures a consistent, reasonably-pleasing graphical style across each plot.
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#'
 #' \code{plot4in1} creates a 2 by 2 panel using \code{par(mfrow = c(2,2))} and
 #' then generates four residual diagnostic plots: a Percentile-Percentile (or
 #' Quantile-Quantile plot if \code{PP = FALSE}), a scatterplot of the
 #' \code{fitted.values} against the residuals, a histogram of the residuals,
 #' and scatterplot of the residuals against their order, overplotted.
-#' 
+#'
 #' @param out the output of the \code{\link[stats]{lm}} function (an object of
 #' class \code{"lm"}). The components of greatest importance from this object
 #' are \code{residuals} (perhaps passed to \code{rstandard} of \code{rstudent},
@@ -58,65 +56,64 @@
 #' \code{\link[graphics]{par}}).
 #' @param ... other arguments to be passed to the graphing functions.
 #' @return None
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' \code{\link[stats]{influence.measures}} for more information about
+#' @seealso \code{\link[stats]{influence.measures}} for more information about
 #' standardized (\code{rstandard}) and studentized (\code{rstudent}) residuals;
 #' \code{\link[stats]{qqnorm}} for more information about the Quantile-Quanitle
 #' (Q-Q) plot; \code{\link[graphics]{par}} for information about the graphical
 #' parameters.
 #' @examples
-#' 
+#'
 #' out <- lm(Girth ~ Volume, data = trees)
 #' plot4in1(out)
-#' 
+#'
 #' @export plot4in1
 plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=1.2, ...){
   # Because we change the user's par:
-  oldpar <- par(no.readonly = TRUE)
-  on.exit(par(oldpar))
+  oldpar <- graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(oldpar))
 
-  par(mfrow = c(2,2)) # set up a 2x2 grid for plots
+  graphics::par(mfrow = c(2,2)) # set up a 2x2 grid for plots
 
   if (type=="Regular") {
     res <- out$residuals
   }
 
   if (type=="Standardized"){
-    res <- rstandard(out)
+    res <- stats::rstandard(out)
   }
 
   if (type=="Studentized"){
-    res <- rstudent(out)
+    res <- stats::rstudent(out)
   }
 
   # Q-Q Plot
   if (!PP){
-    qqnorm(res, pch=pch, col=col, cex=cex, ...)
-    qqline(res, col="red", ...)
+    stats::qqnorm(res, pch=pch, col=col, cex=cex, ...)
+    stats::qqline(res, col="red", ...)
   }
   # P-P Plot
   if (PP){
-    ps <- pnorm(res)
-    plot(x = ppoints(length(res)),
+    ps <- stats::pnorm(res)
+    graphics::plot(x = stats::ppoints(length(res)),
          y = sort(ps),
          main = "Normal Probability Plot",
          xlab = ifelse(type=="Regular","Residual",paste(type,"Residual")),
-         ylab = "Percent", ,
+         ylab = "Percent",
          pch = pch, col = col, cex = cex, ...)
-    abline(0, 1, col = "red", ...)
+    graphics::abline(0, 1, col = "red", ...)
   }
 
   # Versus Fits
-  plot(x=out$fitted.values,y=res,
+  graphics::plot(x=out$fitted.values,y=res,
        pch=pch, col=col, cex=cex,
        main="Versus Fits",
        xlab="Fitted Value",
        ylab=paste(type,"Residuals"), ...)
 
-  abline(h=0, lty=2, ...)
+  graphics::abline(h=0, lty=2, ...)
 
   # Histogram
-  hist(res,
+  graphics::hist(res,
        col=col,
        main="Histogram",
        xlab=paste(type,"Residuals"), ...)
@@ -124,7 +121,7 @@ plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=
   # Versus Order
   n <- length(res)
 
-  plot(y=res,
+  graphics::plot(y=res,
        x=1:n,
        col=col,
        type="o",
@@ -132,5 +129,5 @@ plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=
        xlab="Observation Order",
        ylab=paste(type,"Residuals"),
        main="Versus Order", ...)
-  abline(h=0, lty=2, ...)
+  graphics::abline(h=0, lty=2, ...)
 }

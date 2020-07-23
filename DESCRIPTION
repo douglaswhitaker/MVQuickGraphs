@@ -1,7 +1,7 @@
 Package: MVQuickGraphs
 Type: Package
 Title: Quick Multivariate Graphs
-Version: 0.1.2
+Version: 0.1.4
 Author: Douglas Whitaker
 Maintainer: Douglas Whitaker <douglas.whitaker@msvu.ca>
 Description: Functions used for graphing in multivariate contexts. These 
@@ -15,4 +15,5 @@ License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-  plotrix
+  stats, graphics, plotrix
+RoxygenNote: 7.1.0

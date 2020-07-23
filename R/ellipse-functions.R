@@ -99,14 +99,14 @@ confidenceEllipse <- function(X.mean = c(0,0),
   axis1 <- sqrt(eig$values[1]) *
     sqrt((p * (n - 1)) /
            (n * (n - p)) *
-           qf(1 - alpha, p, n - p))
+           stats::qf(1 - alpha, p, n - p))
 
   # Calculate the half-length of the minor axis
   # This is an application of result (5-19) in Johnson & Wichern (2007)
   axis2 <- sqrt(eig$values[2]) *
     sqrt((p * (n - 1)) /
            (n * (n - p)) *
-           qf(1 - alpha, p, n - p))
+           stats::qf(1 - alpha, p, n - p))
 
   # create a vector of axis lengths we can use
   lengths <- c(axis1,axis2)
@@ -178,7 +178,7 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 
   # Critical value for the constant density contour (always df=2 because this is bivariate normal)
   # Johnson & Wichern (2008) result (4-8)
-  clevel <- qchisq(1 - alpha, df = 2)
+  clevel <- stats::qchisq(1 - alpha, df = 2)
 
   # User needs to supply either eig or Sigma
   if (!is.null(Sigma)){
@@ -212,26 +212,21 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 #' work on the user's part to specify the limits).
 #'
 #'
-#' @param mu %% ~~Describe \code{mu} here~~ column matrix giving the
-#' coordinates for the cener of the ellipse.
-#' @param lengths %% ~~Describe \code{lengths} here~~ vector giving the major
-#' and minor axis lengths.
-#' @param angle %% ~~Describe \code{angle} here~~ angle of rotation (in
-#' radians).
-#' @param xl %% ~~Describe \code{xl} here~~ x-axis limits. If \code{xl = NULL}
-#' then these are computed automatically.
-#' @param yl %% ~~Describe \code{yl} here~~ y-axis limits. If \code{yl = NULL}
-#' then these are computed automatically.
-#' @param lim.adj %% ~~Describe \code{lim.adj} here~~ a value giving an
-#' adjustment to the x-axis and y-axis limits computed if either \code{xl =
-#' NULL} or \code{yl = NULL}.
-#' @param axes %% ~~Describe \code{axes} here~~ logical. If \code{axes = TRUE},
-#' then the major and minor axes are graphed.
-#' @param center %% ~~Describe \code{center} here~~ logical. If
-#' \code{axes = TRUE} then the center of the ellipse is indicated with a point
-#' and dashed lines are drawn to the x-axis and y-axis.
-#' @param \dots %% ~~Describe \code{\dots} here~~ other arguments to be passed
-#' to the graphing functions.
+#' @param mu column matrix giving the coordinates for the cener of the ellipse.
+#' @param lengths vector giving the major and minor axis lengths.
+#' @param angle angle of rotation (in radians).
+#' @param xl x-axis limits. If \code{xl = NULL} then these are computed
+#' automatically.
+#' @param yl y-axis limits. If \code{yl = NULL} then these are computed
+#' automatically.
+#' @param lim.adj a value giving an adjustment to the x-axis and y-axis limits
+#' computed if either \code{xl = NULL} or \code{yl = NULL}.
+#' @param axes logical. If \code{axes = TRUE}, then the major and minor axes are
+#' graphed.
+#' @param center logical. If \code{axes = TRUE} then the center of the ellipse
+#' is indicated with a point and dashed lines are drawn to the x-axis and
+#' y-axis.
+#' @param \dots other arguments to be passed to the graphing functions.
 #' @return None
 eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, lim.adj, axes, center, ...){
   axis1 <- lengths[1]
@@ -260,7 +255,7 @@ eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, lim.adj, axes, center
   }
 
   # Call an empty graph that we can add the normal contour ellipseto
-  plot(0,pch='',ylab='',xlab='',xlim=xl,ylim=yl)
+  graphics::plot(0,pch='',ylab='',xlab='',xlim=xl,ylim=yl)
 
   # draw the ellipse
   # draw.ellipse is from package plotrix
@@ -271,17 +266,17 @@ eigenEllipseHelper <- function(mu, lengths, angle, xl, yl, lim.adj, axes, center
   # if TRUE draw the major and minor axes for the normal contour ellipse
   # These are just line segments using the offsets from the mean calculcated earlier.
   if (axes){
-    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] + axis1.x, y0 = mu[2,1] + axis1.y)
-    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] - axis1.x, y0 = mu[2,1] - axis1.y)
-    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] + axis2.x, y0 = mu[2,1] + axis2.y)
-    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] - axis2.x, y0 = mu[2,1] - axis2.y)
+    graphics::segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] + axis1.x, y0 = mu[2,1] + axis1.y)
+    graphics::segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] - axis1.x, y0 = mu[2,1] - axis1.y)
+    graphics::segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] + axis2.x, y0 = mu[2,1] + axis2.y)
+    graphics::segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1] - axis2.x, y0 = mu[2,1] - axis2.y)
   }
 
   # if TRUE show the center as a point and draw dashed lines orthogonal to the x and y axes
   # These are just line vertical and horizontal segments from the origin to the x and y axes, respectively
   if (center){
-    segments(x1 = mu[1,1], y1 = mu[2,1], y0 = mu[2,1], x0 = 0, lty=2)
-    segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1], y0 = 0, lty=2)
-    points(x = mu[1,1], y = mu[2,1], pch = 19)
+    graphics::segments(x1 = mu[1,1], y1 = mu[2,1], y0 = mu[2,1], x0 = 0, lty=2)
+    graphics::segments(x1 = mu[1,1], y1 = mu[2,1], x0 = mu[1,1], y0 = 0, lty=2)
+    graphics::points(x = mu[1,1], y = mu[2,1], pch = 19)
   }
 }
