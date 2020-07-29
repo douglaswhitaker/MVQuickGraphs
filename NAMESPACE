@@ -2,4 +2,6 @@
 
 export(bvNormalContour)
 export(confidenceEllipse)
+export(make_all_rects)
+export(make_rect)
 export(plot4in1)

@@ -1,8 +1,11 @@
 Package: MVQuickGraphs
 Type: Package
 Title: Quick Multivariate Graphs
-Version: 0.1.4
-Author: Douglas Whitaker
+Version: 0.1.5
+Authors@R: c(
+  person("Douglas", "Whitaker", email = "douglas.whitaker@msvu.ca", 
+    role = c("cre", "aut")),
+  person("Nathan", "Hebert", email = "nathan.hebert@msvu.ca", role = "aut"))
 Maintainer: Douglas Whitaker <douglas.whitaker@msvu.ca>
 Description: Functions used for graphing in multivariate contexts. These 
     functions are designed to support produce reasonable graphs with minimal 
@@ -15,5 +18,5 @@ License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-  stats, graphics, plotrix
+  stats, graphics, plotrix, corrplot
 RoxygenNote: 7.1.0

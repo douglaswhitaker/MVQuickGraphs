@@ -1,5 +1,3 @@
-library(corrplot)
-
 #' Add a rectangle to a correlation plot
 
 #' @param rstart The name of the variable contained in the correlation plot that will serve as the vertical starting point of the rectangle.
