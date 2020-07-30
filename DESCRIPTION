@@ -19,4 +19,6 @@ Encoding: UTF-8
 LazyData: true
 Imports:
   stats, graphics, plotrix, corrplot
+Suggests:
+  psych
 RoxygenNote: 7.1.0
