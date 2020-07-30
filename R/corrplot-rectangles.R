@@ -12,7 +12,8 @@
 #' @param lwd Determines the width of the rectangle lines.
 #' @param ... Arguments to modify graphical parameters, etc.
 #' @examples
-#' #Adding an on-diagonal rectangle to a correlation plot with mirroring, using the Bechtoldt sample correlation matrix provided by the psych package.
+#' #Adding an on-diagonal rectangle to a correlation plot with mirroring, using
+#' #the Bechtoldt sample correlation matrix provided by the psych package.
 #' library(corrplot)
 #' library(psych)
 #' corrplot(Bechtoldt)
@@ -65,7 +66,8 @@ make_rect <- function(rstart, rend, cstart=NULL, cend=NULL, correlation_matrix, 
 #' @param correlation_matrix The correlation matrix the correlation plot is based on.
 #' @param ... Arguments to modify graphical parameters, etc.
 #' @examples
-#' #Adds all rectangles associated with the cutpoints to the correlation plot of the Bechtoldt sample correlation matrix (provided by the psych package).
+#' #Adds all rectangles associated with the cutpoints to the correlation plot of
+#' #the Bechtoldt sample correlation matrix (provided by the psych package).
 #' library(psych)
 #' corrplot::corrplot(Bechtoldt)
 #' make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", correlation_matrix=Bechtoldt)

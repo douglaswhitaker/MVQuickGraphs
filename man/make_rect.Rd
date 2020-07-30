@@ -39,7 +39,8 @@ The function ignores this entirely if the rectangle is on the diagonal, as there
 Add a rectangle to a correlation plot
 }
 \examples{
-#Adding an on-diagonal rectangle to a correlation plot with mirroring, using the Bechtoldt sample correlation matrix provided by the psych package.
+#Adding an on-diagonal rectangle to a correlation plot with mirroring, using
+the Bechtoldt sample correlation matrix provided by the psych package.
 library(corrplot)
 library(psych)
 corrplot(Bechtoldt)

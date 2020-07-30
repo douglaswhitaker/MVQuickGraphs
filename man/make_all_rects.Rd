@@ -43,7 +43,8 @@ The second cutpoint then defines the starting point of the second rectangle, and
 Allows the creation of all rectangles on a correlation plot using a vector of cutpoints to divide them.
 }
 \examples{
-#Adds all rectangles associated with the cutpoints to the correlation plot of the Bechtoldt sample correlation matrix (provided by the psych package).
+#Adds all rectangles associated with the cutpoints to the correlation plot of
+the Bechtoldt sample correlation matrix (provided by the psych package).
 library(psych)
 corrplot::corrplot(Bechtoldt)
 make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", correlation_matrix=Bechtoldt)
