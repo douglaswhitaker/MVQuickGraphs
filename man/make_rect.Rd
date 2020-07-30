@@ -18,15 +18,20 @@ make_rect(
 \arguments{
 \item{rstart}{The name of the variable contained in the correlation plot that will serve as the vertical starting point of the rectangle.}
 
-\item{rend}{(optional) The name of the variable contained in the correlation plot that will serve as the horizontal ending point of the rectangle.
-If no cstart or cend provided, creates an on-diagonal rectangle automatically. cstart and cend allows fo off-diagonal rectangles.}
+\item{rend}{The name of the variable contained in the correlation plot that will serve as the vertical ending point of the rectangle.}
 
 \item{cstart}{(optional) The name of the variable contained in the correlation plot that will serve as the horizontal starting point of the rectangle.
-If no cstart or cend provided, creates an on-diagonal rectangle automatically. cstart and cend allows fo off-diagonal rectangles.}
+If no cstart or cend provided, creates an on-diagonal rectangle automatically. cstart and cend allows for off-diagonal rectangles.}
+
+\item{cend}{(optional) The name of the variable contained in the correlation plot that will serve as the horizontal ending point of the rectangle.
+If no cstart or cend provided, creates an on-diagonal rectangle automatically. cstart and cend allows for off-diagonal rectangles.}
 
 \item{correlation_matrix}{The correlation matrix the correlation plot is based on.}
 
-\item{mirror}{If TRUE, also adds the equivalent rectangle from the other side of the diagonal (i.e. the "mirror" of the original).}
+\item{mirror}{If TRUE, also adds the equivalent rectangle from the other side of the diagonal (i.e. the "mirror" of the original).
+The function ignores this entirely if the rectangle is on the diagonal, as there is no mirror.}
+
+\item{lwd}{Determines the width of the rectangle lines.}
 
 \item{...}{Arguments to modify graphical parameters, etc.}
 }
@@ -34,11 +39,13 @@ If no cstart or cend provided, creates an on-diagonal rectangle automatically. c
 Add a rectangle to a correlation plot
 }
 \examples{
-#Adding an on-diagonal rectangle to a correlation plot of the USArrests data with mirroring.
-corrplot(cor(USArrests))
-make_rect(rstart="Assault", rend="UrbanPop", correlation_matrix=cor(USArrests), mirror=TRUE)
+#Adding an on-diagonal rectangle to a correlation plot with mirroring, using the Bechtoldt sample correlation matrix provided by the psych package.
+library(corrplot)
+library(psych)
+corrplot(Bechtoldt)
+make_rect(rstart="First_Names", rend="Flags", correlation_matrix=Bechtoldt, mirror=TRUE)
 
 #Adding an off-diagonal rectangle
-make_rect(rstart="Murder", rend="Rape", cstart="Murder", cend="Murder", correlation_matrix=cor(USArrests))
+make_rect(rstart="First_Names", rend="Flags", cstart="First_Names", cend="Sentences", correlation_matrix=Bechtoldt)
 
 }

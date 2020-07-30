@@ -18,7 +18,7 @@ make_all_rects(
 )
 }
 \arguments{
-\item{cutpoints}{A vector containing the names of the cutpoints (i.e names of variables contained in the correlation plot). The first cutpoint is the variable that will start off the first rectangle. 
+\item{cutpoints}{A vector containing the names of the cutpoints (i.e names of variables contained in the correlation plot). The first cutpoint is the variable that will start off the first rectangle.
 The second cutpoint then defines the starting point of the second rectangle, and so on.}
 
 \item{endpoint}{The name of the variable contained in the correlation plot that will define the end of the last rectangle to be made.}
@@ -43,11 +43,12 @@ The second cutpoint then defines the starting point of the second rectangle, and
 Allows the creation of all rectangles on a correlation plot using a vector of cutpoints to divide them.
 }
 \examples{
-#Adds all rectangles associated with the cutpoints to the correlation plot for USArrests.
-corrplot::corrplot(cor(USArrests))
-make_all_rects(cutpoints=c("Assault", "Rape"), endpoint="Rape", correlation_matrix=cor(USArrests))
+#Adds all rectangles associated with the cutpoints to the correlation plot of the Bechtoldt sample correlation matrix (provided by the psych package).
+library(psych)
+corrplot::corrplot(Bechtoldt)
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", correlation_matrix=Bechtoldt)
 
 #Adds all on-diagonal rectangles associated with the cutpoints.
-make_all_rects(cutpoints=c("Assault", "Rape"), endpoint="Rape", offdiag=FALSE, correlation_matrix=cor(USArrests))
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", offdiag=FALSE, correlation_matrix=Bechtoldt)
 
 }

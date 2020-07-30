@@ -4,11 +4,12 @@
 #' @param rend The name of the variable contained in the correlation plot that will serve as the vertical ending point of the rectangle.
 #' @param cstart (optional) The name of the variable contained in the correlation plot that will serve as the horizontal starting point of the rectangle.
 #' If no cstart or cend provided, creates an on-diagonal rectangle automatically. cstart and cend allows for off-diagonal rectangles.
-#' @param rend (optional) The name of the variable contained in the correlation plot that will serve as the horizontal ending point of the rectangle.
+#' @param cend (optional) The name of the variable contained in the correlation plot that will serve as the horizontal ending point of the rectangle.
 #' If no cstart or cend provided, creates an on-diagonal rectangle automatically. cstart and cend allows for off-diagonal rectangles.
 #' @param correlation_matrix The correlation matrix the correlation plot is based on.
 #' @param mirror If TRUE, also adds the equivalent rectangle from the other side of the diagonal (i.e. the "mirror" of the original).
 #' The function ignores this entirely if the rectangle is on the diagonal, as there is no mirror.
+#' @param lwd Determines the width of the rectangle lines.
 #' @param ... Arguments to modify graphical parameters, etc.
 #' @examples
 #' #Adding an on-diagonal rectangle to a correlation plot with mirroring, using the Bechtoldt sample correlation matrix provided by the psych package.
