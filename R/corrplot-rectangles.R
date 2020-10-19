@@ -20,7 +20,8 @@
 #' make_rect(rstart="First_Names", rend="Flags", correlation_matrix=Bechtoldt, mirror=TRUE)
 #'
 #' #Adding an off-diagonal rectangle
-#' make_rect(rstart="First_Names", rend="Flags", cstart="First_Names", cend="Sentences", correlation_matrix=Bechtoldt)
+#' make_rect(rstart="First_Names", rend="Flags", cstart="First_Names",
+#' cend="Sentences", correlation_matrix=Bechtoldt)
 #'
 #' @export
 
@@ -42,7 +43,7 @@ make_rect <- function(rstart, rend, cstart=NULL, cend=NULL, correlation_matrix, 
   topy <- length(correlation_matrix[,1])-which(colnames(correlation_matrix)==rstart)+1+.5
 
   #uses rect function to construct the rectangle using above values as the parameters
-  rect(xleft = leftx, ybottom = bottomy, xright = rightx, ytop = topy, lwd=lwd,...)
+  graphics::rect(xleft = leftx, ybottom = bottomy, xright = rightx, ytop = topy, lwd=lwd,...)
 
   #If mirror is set to be TRUE, draws the same rectangle on the other side of the diagonal. Function ignores mirror if diagonal as there is no mirror.
   if (mirror==TRUE){
@@ -70,10 +71,12 @@ make_rect <- function(rstart, rend, cstart=NULL, cend=NULL, correlation_matrix, 
 #' #the Bechtoldt sample correlation matrix (provided by the psych package).
 #' library(psych)
 #' corrplot::corrplot(Bechtoldt)
-#' make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", correlation_matrix=Bechtoldt)
+#' make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint
+#' ="Three_Higher", correlation_matrix=Bechtoldt)
 #'
 #' #Adds all on-diagonal rectangles associated with the cutpoints.
-#' make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", offdiag=FALSE, correlation_matrix=Bechtoldt)
+#' make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint
+#' ="Three_Higher", offdiag=FALSE, correlation_matrix=Bechtoldt)
 #'
 #' @export
 

@@ -40,13 +40,14 @@ Add a rectangle to a correlation plot
 }
 \examples{
 #Adding an on-diagonal rectangle to a correlation plot with mirroring, using
-the Bechtoldt sample correlation matrix provided by the psych package.
+#the Bechtoldt sample correlation matrix provided by the psych package.
 library(corrplot)
 library(psych)
 corrplot(Bechtoldt)
 make_rect(rstart="First_Names", rend="Flags", correlation_matrix=Bechtoldt, mirror=TRUE)
 
 #Adding an off-diagonal rectangle
-make_rect(rstart="First_Names", rend="Flags", cstart="First_Names", cend="Sentences", correlation_matrix=Bechtoldt)
+make_rect(rstart="First_Names", rend="Flags", cstart="First_Names",
+cend="Sentences", correlation_matrix=Bechtoldt)
 
 }

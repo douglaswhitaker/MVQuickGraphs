@@ -44,12 +44,14 @@ Allows the creation of all rectangles on a correlation plot using a vector of cu
 }
 \examples{
 #Adds all rectangles associated with the cutpoints to the correlation plot of
-the Bechtoldt sample correlation matrix (provided by the psych package).
+#the Bechtoldt sample correlation matrix (provided by the psych package).
 library(psych)
 corrplot::corrplot(Bechtoldt)
-make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", correlation_matrix=Bechtoldt)
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint
+="Three_Higher", correlation_matrix=Bechtoldt)
 
 #Adds all on-diagonal rectangles associated with the cutpoints.
-make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", offdiag=FALSE, correlation_matrix=Bechtoldt)
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint
+="Three_Higher", offdiag=FALSE, correlation_matrix=Bechtoldt)
 
 }
