@@ -16,7 +16,6 @@ Description: Functions used for graphing in multivariate contexts. These
     ISBN:9780131877153).
 License: GPL-2 | GPL-3
 Encoding: UTF-8
-LazyData: true
 Imports:
   stats, graphics, plotrix, corrplot
 Suggests:
