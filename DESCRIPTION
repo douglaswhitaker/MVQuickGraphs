@@ -2,11 +2,11 @@ Package: MVQuickGraphs
 Type: Package
 Title: Quick Multivariate Graphs
 Version: 0.1.5
+Date: 2021-06-23
 Authors@R: c(
   person("Douglas", "Whitaker", email = "douglas.whitaker@msvu.ca", 
     role = c("cre", "aut")),
   person("Nathan", "Hebert", email = "nathan.hebert@msvu.ca", role = "aut"))
-Maintainer: Douglas Whitaker <douglas.whitaker@msvu.ca>
 Description: Functions used for graphing in multivariate contexts. These 
     functions are designed to support produce reasonable graphs with minimal 
     input of graphing parameters. The motivation for these functions was to 
@@ -21,4 +21,4 @@ Imports:
   stats, graphics, plotrix, corrplot
 Suggests:
   psych
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
