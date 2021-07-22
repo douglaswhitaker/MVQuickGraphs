@@ -20,5 +20,8 @@ LazyData: true
 Imports:
   stats, graphics, plotrix, corrplot
 Suggests:
-  psych
+    rmarkdown,
+    knitr,
+    psych
 RoxygenNote: 7.1.0
+VignetteBuilder: knitr
