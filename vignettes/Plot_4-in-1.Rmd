@@ -1,0 +1,65 @@
+---
+title: "Plot 4-in-1"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plot 4-in-1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height=5,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MVQuickGraphs)
+```
+
+_plot4in1_ creates a 2x2 panel graph that contains four often-used residual diagnostic plots for linear regression:
+
+- a Percentile-Percentile plot or a Quantile-Quantile plot (depending on specification by the user),
+- a scatterplot of the fitted values against the residuals,
+- a histogram of the residuals, and
+- a scatterplot of the residuals against their order.
+
+The function ensures a consistent and graphically-pleasing style across the four plots. It is also designed to be intuitive; the function was originally intended to be used for students learning to use R for the first time in a course on regression.
+
+## Basic functionality
+
+The function need only take one parameter: out, the output of the _lm_ function.
+
+```{r}
+out <- lm(Girth ~ Volume, data = trees)
+plot4in1(out)
+```
+
+By default, a Normal Percentile Plot (P-P Plot) is provided in the top-left panel (because the parameter PP = TRUE by default). To instead generate a Normal Quantile Plot (Q-Q Plot) for the top-left panel, one can set the parameter PP = FALSE.
+
+```{r}
+plot4in1(out, PP = FALSE)
+```
+
+One can also change the type of residuals used in the plots with the type parameter. One can set (residual) type to be either "Regular", "Standardized", or "Studentized". Using type = "Regular" results in untransformed residuals being used, type = "Standardized" uses standardized residuals (computed using _rstandard_), and type = "Studentized" uses externally studentized residuals (computed using _rstudent_).
+
+```{r}
+plot4in1(out, type = "Regular")
+plot4in1(out, type = "Standardized")
+plot4in1(out, type = "Studentized")
+```
+
+## Graphical options
+
+The color used in the plots can changed from its default of "steelblue" by providing the col parameter in the function call.
+
+```{r}
+plot4in1(out, col = "orange")
+```
+
+The symbols used in all plots but the histogram can be also be modified. Using the pch parameter, one can specify the symbol to be used. The default is a filled circle (pch = 19). The size of the symbols can be set with cex (where the default value for cex is 1.2). The function can also take additional graphical parameters.
+
+```{r}
+plot4in1(out, pch = 18, cex = 1.6)
+```
