@@ -7,6 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(fig.width=7, fig.height=5,
   collapse = TRUE,
@@ -36,7 +42,7 @@ out <- lm(Girth ~ Volume, data = trees)
 plot4in1(out)
 ```
 
-By default, a Normal Percentile Plot (P-P Plot) is provided in the top-left panel (because the parameter PP is set to TRUE by default). To instead generate a Normal Quantile Plot (Q-Q Plot) for the top-left panel, one can set the parameter PP to FALSE.
+By default, a Normal Percentile Plot (P-P Plot) is provided in the top-left panel (because the parameter `PP` is set to TRUE by default). To instead generate a Normal Quantile Plot (Q-Q Plot) for the top-left panel, one can set the parameter `PP` to FALSE.
 
 ```{r}
 plot4in1(out, PP = FALSE)
@@ -44,21 +50,21 @@ plot4in1(out, PP = FALSE)
 
 ## Changing the type of residuals used
 
-One can set (residual) type to be either "Regular" (the default), "Standardized", or "Studentized". 
+One can set the residual type to be either "Regular" (the default), "Standardized", or "Studentized". 
 
-If type = "Regular", untransformed residuals are used in the plots.
+If `type = "Regular"`, untransformed residuals are used in the plots.
 
 ```{r}
 plot4in1(out, type = "Regular")
 ```
 
-If type = "Standardized", standardized residuals are used (as computed by _rstandard_).
+If `type = "Standardized"`, standardized residuals are used (as computed by _rstandard_).
 
 ```{r}
 plot4in1(out, type = "Standardized")
 ```
 
-Finally, if type = "Studentized", externally studentized residuals are used (as computed by _rstudent_).
+Finally, if `type = "Studentized"`, externally studentized residuals are used (as computed by _rstudent_).
 
 ```{r}
 plot4in1(out, type = "Studentized")
@@ -66,13 +72,13 @@ plot4in1(out, type = "Studentized")
 
 ## Graphical options
 
-The color used in the plots can be changed from the default of "steelblue" by providing a different value for the col parameter in the function call.
+The color used in the plots can be changed from the default of "steelblue" by providing a different value for `col` in the function call.
 
 ```{r}
 plot4in1(out, col = "orange")
 ```
 
-The symbols (used in all plots but the histogram) can also be modified. Using the pch parameter, one can specify the symbol to be used. The default is a filled circle (pch = 19). See the _points_ documentation page for more information on the supported symbols. Additionally, the size of the symbols can be set with cex (where the default value for cex is 1.2).
+The symbols (used in all plots but the histogram) can also be modified. Using the `pch` parameter, one can specify the symbol to be used. The default is a filled circle (`pch = 19`). See the _points_ documentation page for more information on the supported symbols. Additionally, the size of the symbols can be set with `cex` (where the default value for `cex` is 1.2).
 
 ```{r}
 plot4in1(out, col = "orange", pch = 18, cex = 1.6)

@@ -7,6 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(fig.width=7, fig.height=5,
   collapse = TRUE,
@@ -26,7 +32,7 @@ _make_rect()_ allows the user to add rectangles to correlation plots generated b
 
 ## On-diagonal rectangles
 
-**The correlation matrix used to generate the correlation plot must always be given.** If the rectangle lies on the main diagonal, the user only needs to provide two additional parameters: rstart and rend. rstart is the variable that will serve as the vertical starting point of the rectangle, and rend is the variable that serves as the vertical ending point.
+**The correlation matrix used to generate the correlation plot must always be given.** If the rectangle lies on the main diagonal, the user only needs to provide two additional parameters: `rstart` and `rend`. `rstart` is the variable that will serve as the vertical starting point of the rectangle, and `rend` is the variable that serves as the vertical ending point.
 
 The following code creates a correlation plot using psych's Bechtoldt correlation matrix, and then adds an on-diagonal rectangle that starts at _Sentences_ and ends at _Completion_.
 
@@ -37,7 +43,7 @@ make_rect(rstart="Sentences", rend="Completion", correlation_matrix=Bechtoldt)
 
 ## Off-diagonal rectangles
 
-If the rectangle of interest is off the diagonal, two additional parameters are needed: cstart, the name of the variable contained in the correlation plot that will serve as the horizontal starting point of the rectangle, and cend, the name of the variable that will serve as the horizontal ending point.
+If the rectangle of interest is off the diagonal, two additional parameters are needed: `cstart`, the name of the variable contained in the correlation plot that will serve as the horizontal starting point of the rectangle, and `cend`, the name of the variable that will serve as the horizontal ending point.
 
 ```{r}
 corrplot(Bechtoldt)
@@ -46,7 +52,7 @@ make_rect(rstart="Sentences", rend="Completion", cstart = "Letter_Series", cend 
 
 ## Additional functionality
 
-The function can be called numerous times to add multiple rectangles on one plot. It also allows you to change the width of the lines on the rectangle (with lwd), and takes additional graphical parameters supported by base R's _rect()_ function.
+The function can be called numerous times to add multiple rectangles on one plot. It also allows you to change the width of the lines on the rectangle (with `lwd`), and takes additional graphical parameters supported by base R's _rect()_ function.
 
 ```{r}
 corrplot(Bechtoldt)
@@ -54,7 +60,7 @@ make_rect(rstart="Sentences", rend="Completion", correlation_matrix=Bechtoldt, l
 make_rect(rstart="Flags", rend="Cards", correlation_matrix=Bechtoldt)
 ```
 
-For an off-diagonal rectangle, one can set mirror = TRUE to ask the function to add the equivalent rectangle on the other side of the diagonal. If mirror = TRUE for an on-diagonal rectangle, the parameter will be ignored as on-diagonal rectangles have no mirror.
+For an off-diagonal rectangle, one can set `mirror = TRUE` to ask the function to add the equivalent rectangle on the other side of the diagonal. If `mirror = TRUE` for an on-diagonal rectangle, the parameter will be ignored as on-diagonal rectangles have no mirror.
 
 ```{r}
 #off-diagonal rectangle
@@ -68,14 +74,14 @@ make_rect(rstart="Flags", rend="Cards", correlation_matrix=Bechtoldt, mirror = T
 
 # make_all_rects()
 
-_make_all_rects()_ allows the user to create all rectangles on a correlation plot associated with the series of cutpoints used to divide them. cutpoints is a vector, where the first element is the name of the variable that the first rectangle starts at, and the second element is the name of the variable that the second rectangle starts at, and so on. endpoint is the name of the variable that the last rectangle ends on.
+_make_all_rects()_ allows the user to create all rectangles on a correlation plot associated with the series of cutpoints used to divide them. `cutpoints` is a vector, where the first element is the name of the variable that the first rectangle starts at, and the second element is the name of the variable that the second rectangle starts at, and so on. `endpoint` is the name of the variable that the last rectangle ends on.
 
 ```{r}
 corrplot(Bechtoldt)
 make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", correlation_matrix=Bechtoldt)
 ```
 
-By default, the function creates both on-diagonal and off-diagonal rectangles (which differ in colour). However, one can set ondiag or offdiag to FALSE to control the type of rectangles generated.
+By default, the function creates both on-diagonal and off-diagonal rectangles (which differ in colour). However, one can set `ondiag` or `offdiag` to FALSE to control the type of rectangles generated.
 
 ```{r}
 #only off-diagonal rectangles
@@ -86,7 +92,7 @@ corrplot(Bechtoldt)
 make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes", "Multiplication"), endpoint="Letter_Grouping", correlation_matrix=Bechtoldt, offdiag = FALSE)
 ```
 
-One can customize the colour and line width of on-diagonal rectangles with col_ondiag and ondiag_width respectively. For off-diagonal rectangles, these elements can be changed with the col_offdiag and offdiag_width parameters. 
+One can customize the colour and line width of on-diagonal rectangles with `col_ondiag` and `ondiag_width` respectively. For off-diagonal rectangles, these elements can be changed with the `col_offdiag` and `offdiag_width` parameters. 
 
 ```{r}
 corrplot(Bechtoldt)
