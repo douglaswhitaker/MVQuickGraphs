@@ -24,18 +24,18 @@ knitr::opts_chunk$set(fig.width=7, fig.height=5,
 library(MVQuickGraphs)
 ```
 
-_plot4in1_ creates a 2x2 panel graph that contains four often-used residual diagnostic plots for linear regression:
+_plot4in1()_ creates a 2x2 panel graph that contains four often-used residual diagnostic plots for linear regression:
 
 - a Percentile-Percentile plot or a Quantile-Quantile plot (depending on what the user specifies),
 - a scatterplot of the fitted values against the residuals,
 - a histogram of the residuals,
 - and a scatterplot of the residuals against their order.
 
-The function ensures the graphical style is consistent across the four plots. It is also designed to be intuitive; _plot4in1_ was originally intended to be used by students learning R for the first time during an introductory course on regression.
+The function ensures the graphical style is consistent across the four plots. It is also designed to be intuitive; _plot4in1()_ was originally intended to be used by students learning R for the first time during an introductory course on regression.
 
 ## Basic functionality
 
-To produce a panel graph, the function needs to only be given the output of the _lm_ function.
+To produce a panel graph, the function needs to only be given the output of _lm()_, as illustrated below by a simple regression model found for the _trees_ dataset.
 
 ```{r}
 out <- lm(Girth ~ Volume, data = trees)
@@ -58,13 +58,13 @@ If `type = "Regular"`, untransformed residuals are used in the plots.
 plot4in1(out, type = "Regular")
 ```
 
-If `type = "Standardized"`, standardized residuals are used (as computed by _rstandard_).
+If `type = "Standardized"`, standardized residuals are used (as computed by _rstandard()_).
 
 ```{r}
 plot4in1(out, type = "Standardized")
 ```
 
-Finally, if `type = "Studentized"`, externally studentized residuals are used (as computed by _rstudent_).
+Finally, if `type = "Studentized"`, externally studentized residuals are used (as computed by _rstudent()_).
 
 ```{r}
 plot4in1(out, type = "Studentized")
@@ -78,7 +78,7 @@ The color used in the plots can be changed from the default of "steelblue" by pr
 plot4in1(out, col = "orange")
 ```
 
-The symbols (used in all plots but the histogram) can also be modified. Using the `pch` parameter, one can specify the symbol to be used. The default is a filled circle (`pch = 19`). See the _points_ documentation page for more information on the supported symbols. Additionally, the size of the symbols can be set with `cex` (where the default value for `cex` is 1.2).
+The symbols (used in all plots but the histogram) can also be modified. Using the `pch` parameter, one can specify the symbol to be used. The default is a filled circle (`pch = 19`). See the _points()_ documentation page for more information on the supported symbols. Additionally, the size of the symbols can be set with `cex` (where the default value for `cex` is 1.2).
 
 ```{r}
 plot4in1(out, col = "orange", pch = 18, cex = 1.6)

@@ -32,9 +32,9 @@ _make_rect()_ allows the user to add rectangles to correlation plots generated b
 
 ## On-diagonal rectangles
 
-**The correlation matrix used to generate the correlation plot must always be given.** If the rectangle lies on the main diagonal, the user only needs to provide two additional parameters: `rstart` and `rend`. `rstart` is the variable that will serve as the vertical starting point of the rectangle, and `rend` is the variable that serves as the vertical ending point.
+**The correlation matrix used to generate the correlation plot must always be given.** If the rectangle lies on the main diagonal, the user only needs to pass two additional arguments: `rstart` and `rend`. `rstart` is the variable that will serve as the vertical starting point of the rectangle, and `rend` is the variable that serves as the vertical ending point.
 
-The following code creates a correlation plot using psych's Bechtoldt correlation matrix, and then adds an on-diagonal rectangle that starts at _Sentences_ and ends at _Completion_.
+The following code creates a correlation plot using psych's Bechtoldt correlation matrix, and then adds an on-diagonal rectangle that starts at "Sentences" and ends at "Completion".
 
 ```{r}
 corrplot(Bechtoldt)
@@ -43,11 +43,12 @@ make_rect(rstart="Sentences", rend="Completion", correlation_matrix=Bechtoldt)
 
 ## Off-diagonal rectangles
 
-If the rectangle of interest is off the diagonal, two additional parameters are needed: `cstart`, the name of the variable contained in the correlation plot that will serve as the horizontal starting point of the rectangle, and `cend`, the name of the variable that will serve as the horizontal ending point.
+If the rectangle of interest is off the diagonal, two additional arguments are needed: `cstart`, the name of the variable contained in the correlation plot that will serve as the horizontal starting point of the rectangle, and `cend`, the name of the variable that will serve as the horizontal ending point.
 
 ```{r}
 corrplot(Bechtoldt)
-make_rect(rstart="Sentences", rend="Completion", cstart = "Letter_Series", cend = "Letter_Grouping", correlation_matrix=Bechtoldt)
+make_rect(rstart="Sentences", rend="Completion", cstart = "Letter_Series", 
+          cend = "Letter_Grouping", correlation_matrix=Bechtoldt)
 ```
 
 ## Additional functionality
@@ -56,7 +57,8 @@ The function can be called numerous times to add multiple rectangles on one plot
 
 ```{r}
 corrplot(Bechtoldt)
-make_rect(rstart="Sentences", rend="Completion", correlation_matrix=Bechtoldt, lwd = 5, border = "orange")
+make_rect(rstart="Sentences", rend="Completion", correlation_matrix=Bechtoldt, 
+          lwd = 5, border = "orange")
 make_rect(rstart="Flags", rend="Cards", correlation_matrix=Bechtoldt)
 ```
 
@@ -65,11 +67,13 @@ For an off-diagonal rectangle, one can set `mirror = TRUE` to ask the function t
 ```{r}
 #off-diagonal rectangle
 corrplot(Bechtoldt)
-make_rect(rstart="Sentences", rend="Completion", cstart = "Letter_Series", cend = "Letter_Grouping", 
+make_rect(rstart="Sentences", rend="Completion", cstart = "Letter_Series", 
+          cend = "Letter_Grouping", 
 
 #on-diagonal rectangle
 correlation_matrix=Bechtoldt, mirror = TRUE)
-make_rect(rstart="Flags", rend="Cards", correlation_matrix=Bechtoldt, mirror = TRUE, border = "blue")
+make_rect(rstart="Flags", rend="Cards", correlation_matrix=Bechtoldt, 
+          mirror = TRUE, border = "blue")
 ```
 
 # make_all_rects()
@@ -78,7 +82,8 @@ _make_all_rects()_ allows the user to create all rectangles on a correlation plo
 
 ```{r}
 corrplot(Bechtoldt)
-make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), endpoint="Three_Higher", correlation_matrix=Bechtoldt)
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes"), 
+               endpoint="Three_Higher", correlation_matrix=Bechtoldt)
 ```
 
 By default, the function creates both on-diagonal and off-diagonal rectangles (which differ in colour). However, one can set `ondiag` or `offdiag` to FALSE to control the type of rectangles generated.
@@ -86,15 +91,22 @@ By default, the function creates both on-diagonal and off-diagonal rectangles (w
 ```{r}
 #only off-diagonal rectangles
 corrplot(Bechtoldt)
-make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes", "Multiplication"), endpoint="Letter_Grouping", correlation_matrix=Bechtoldt, ondiag = FALSE)
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes", 
+               "Multiplication"), endpoint="Letter_Grouping", 
+               correlation_matrix=Bechtoldt, ondiag = FALSE)
 #only on-diagonal rectangles
 corrplot(Bechtoldt)
-make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes", "Multiplication"), endpoint="Letter_Grouping", correlation_matrix=Bechtoldt, offdiag = FALSE)
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Suffixes", 
+               "Multiplication"), endpoint="Letter_Grouping", 
+               correlation_matrix=Bechtoldt, offdiag = FALSE)
 ```
 
 One can customize the colour and line width of on-diagonal rectangles with `col_ondiag` and `ondiag_width` respectively. For off-diagonal rectangles, these elements can be changed with the `col_offdiag` and `offdiag_width` parameters. 
 
 ```{r}
 corrplot(Bechtoldt)
-make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Cards"), endpoint="Three_Higher", correlation_matrix=Bechtoldt, col_offdiag = "orange", col_ondiag = "blue", ondiag_width = 3, offdiag_width = 4)
+make_all_rects(cutpoints=c("First_Names", "Vocabulary", "Cards"), 
+               endpoint="Three_Higher", correlation_matrix=Bechtoldt, 
+               col_offdiag = "orange", col_ondiag = "blue",  ondiag_width = 3, 
+               offdiag_width = 4)
 ```

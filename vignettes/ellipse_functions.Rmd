@@ -1,0 +1,131 @@
+---
+title: "Ellipse functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ellipse_functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height=5,
+  collapse = TRUE,
+  comment = "#>"
+)
+
+options(rmarkdown.html_vignette.check_title = FALSE)
+```
+
+```{r setup}
+library(MVQuickGraphs)
+```
+
+# Bivariate normal confidence ellipses with confidenceEllipse()
+
+For the two dimensions under consideration, _confidenceEllipse()_ plots a two-dimensional (1-`alpha`)100% confidence ellipse from a p-dimensional multivariate normal distribution.
+
+## Basic functionality
+
+This is done by using the eigendecomposition of the associated covariance matrix, and as such, arguments must be passed to the following parameters:
+
+- `X.mean` - the mean of the two dimensions of the p-dimensional multivariate normal distribution, as represented by a column matrix
+
+- `eigen`: the convariance matrix's eigenvalues and eigenvectors, in the same form as the output of _eigen()_. This means that the argument passed should be a list with an entry containing values and another entry containing vectors. Further, the eigenvalues should be ordered from greatest to least.
+
+- `n`: the number of observations in the data.
+
+- `p`: the number of dimensions in the p-dimensional multivariate normal distribution.
+
+The simple example below illustrates basic use of the function for the _ability.cov_ dataset. We begin by finding the neccessary values, and then calling the function.
+
+```{r}
+x.bar <- ability.cov$center[5:6] #mean
+print(x.bar)
+
+#eigenvalues and eigenvectors of covariance matrix
+eigen_of_cov <- eigen(ability.cov$cov[5:6,5:6])
+print(eigen_of_cov)
+
+n <- ability.cov$n.obs #number of observations
+p <- length(ability.cov$center) #number of dimensions
+
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p)
+```
+
+The value for `alpha` can be changed from its default of 0.05. Notice the slight change in the resulting ellipse.
+
+```{r}
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p, alpha = 0.01)
+```
+
+## Additional options
+
+The function allows for further customization of the generated plot.
+
+By default, reasonable upper and lower limits for the x-axis and y-axis are chosen by the function. With `x1` and `y1`, the user can provide limits via vectors.
+
+```{r}
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01)
+```
+
+If at least one of either `x1` or `y1` is set as NULL, one can adjust the limits computed by the function by providing a value for `lim.adj`. Positive values increase the distance and thus make the ellipse appear smaller. Negative values result in the opposite. By default, `lim.adj = 0.02`.
+
+```{r}
+#positive value for lim.adj
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p, lim.adj = 0.1, alpha = 0.01)
+#negative value for lim.adj
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p, lim.adj = -0.1, alpha = 0.01)
+```
+
+If `axes = TRUE` (which is the case by default), the ellipse's major and minor axes are plotted. Thus, to remove them from the ellipse, set `axes = FALSE`.
+
+```{r}
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01, 
+                  axes = FALSE)
+```
+
+Further, by default, `center = FALSE`. If `center = TRUE`, the center of the ellipse will be indicated with a point, and dashed lines are drawn from this point to the x and y axes.
+
+```{r}
+#axes = FALSE and center = TRUE
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01, 
+                  axes = FALSE, center = TRUE)
+#axes = TRUE and center = TRUE
+confidenceEllipse(X.mean = x.bar,
+                  eig = eigen_of_cov,
+                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01, 
+                  axes = TRUE, center = TRUE)
+```
+
+# Bivariate normal contour ellipses with bvNormalContour()
+
+```{r}
+mu <- c(-1,8)
+Sigma <- matrix(c(3,2,2,4), ncol = 2)
+# Draw a 90% contour
+bvNormalContour(mu = mu, Sigma = Sigma, alpha = 0.10)
+```
+
+# References
+
+Johnson, R. A., & Wichern, D. W. (2007). _Applied multivariate statistical analysis (6th ed)_. Pearson Prentice Hall.
