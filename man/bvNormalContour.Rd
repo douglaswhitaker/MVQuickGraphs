@@ -41,7 +41,7 @@ automatically.}
 \item{axes}{logical. If \code{axes = TRUE} (default) then the major and
 minor axes of the ellipse are plotted.}
 
-\item{center}{logical. If \code{axes = TRUE} then the center of the ellipse
+\item{center}{logical. If \code{center = TRUE} then the center of the ellipse
 is indicated with a point and dashed lines are drawn to the x-axis and
 y-axis.}
 

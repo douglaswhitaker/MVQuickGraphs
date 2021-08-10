@@ -42,7 +42,7 @@
 #' automatically.
 #' @param axes logical. If \code{axes = TRUE} (default) then the major and
 #' minor axes of the ellipse are plotted.
-#' @param center logical. If \code{axes = TRUE} then the center of the ellipse
+#' @param center logical. If \code{center = TRUE} then the center of the ellipse
 #' is indicated with a point and dashed lines are drawn to the x-axis and
 #' y-axis.
 #' @param lim.adj a value giving an adjustment to the x-axis and y-axis limits

@@ -26,7 +26,7 @@ computed if either \code{xl = NULL} or \code{yl = NULL}.}
 \item{axes}{logical. If \code{axes = TRUE}, then the major and minor axes are
 graphed.}
 
-\item{center}{logical. If \code{axes = TRUE} then the center of the ellipse
+\item{center}{logical. If \code{center = TRUE} then the center of the ellipse
 is indicated with a point and dashed lines are drawn to the x-axis and
 y-axis.}
 
