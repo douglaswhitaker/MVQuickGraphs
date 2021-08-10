@@ -28,13 +28,13 @@ library(MVQuickGraphs)
 
 # Bivariate normal confidence ellipses with confidenceEllipse()
 
-For the two dimensions under consideration, _confidenceEllipse()_ plots a two-dimensional (1-`alpha`)100% confidence ellipse from a p-dimensional multivariate normal distribution.
+For two dimensions under consideration (which are a part of a p-dimensional multivariate normal distribution), _confidenceEllipse()_ plots a two-dimensional (1-`alpha`)100% confidence ellipse.
 
 ## Basic functionality
 
 This is done by using the eigendecomposition of the associated covariance matrix, and as such, arguments must be passed to the following parameters:
 
-- `X.mean` - the mean of the two dimensions of the p-dimensional multivariate normal distribution, as represented by a column matrix
+- `X.mean`: the mean of the two dimensions under consideration from the distribution, as represented by a column matrix.
 
 - `eigen`: the convariance matrix's eigenvalues and eigenvectors, in the same form as the output of _eigen()_. This means that the argument passed should be a list with an entry containing values and another entry containing vectors. Further, the eigenvalues should be ordered from greatest to least.
 
@@ -42,15 +42,14 @@ This is done by using the eigendecomposition of the associated covariance matrix
 
 - `p`: the number of dimensions in the p-dimensional multivariate normal distribution.
 
-The simple example below illustrates basic use of the function for the _ability.cov_ dataset. We begin by finding the neccessary values, and then calling the function.
+The example below illustrates basic use of the function for the _ability.cov_ covariance matrix. The necessary values are found first, and then passed to _confidenceEllipse()_.
 
 ```{r}
-x.bar <- ability.cov$center[5:6] #mean
-print(x.bar)
+#x.mean
+x.bar <- as.matrix(c(1,2))
 
 #eigenvalues and eigenvectors of covariance matrix
 eigen_of_cov <- eigen(ability.cov$cov[5:6,5:6])
-print(eigen_of_cov)
 
 n <- ability.cov$n.obs #number of observations
 p <- length(ability.cov$center) #number of dimensions
@@ -60,7 +59,7 @@ confidenceEllipse(X.mean = x.bar,
                   n = n, p = p)
 ```
 
-The value for `alpha` can be changed from its default of 0.05. Notice the slight change in the resulting ellipse.
+`alpha` can be changed from its default of 0.05. Notice the slight change in the resulting ellipse.
 
 ```{r}
 confidenceEllipse(X.mean = x.bar,
@@ -80,7 +79,7 @@ confidenceEllipse(X.mean = x.bar,
                   n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01)
 ```
 
-If at least one of either `x1` or `y1` is set as NULL, one can adjust the limits computed by the function by providing a value for `lim.adj`. Positive values increase the distance and thus make the ellipse appear smaller. Negative values result in the opposite. By default, `lim.adj = 0.02`.
+If at least one of either `x1` or `y1` is set as NULL, one can adjust the limits computed by the function by providing a value for `lim.adj`. Positive values increase the distance between the upper and lower limits and thus make the ellipse appear smaller. Negative values result in the opposite effect. By default, `lim.adj = 0.02`.
 
 ```{r}
 #positive value for lim.adj
@@ -102,7 +101,7 @@ confidenceEllipse(X.mean = x.bar,
                   axes = FALSE)
 ```
 
-Further, by default, `center = FALSE`. If `center = TRUE`, the center of the ellipse will be indicated with a point, and dashed lines are drawn from this point to the x and y axes.
+Further, by default, `center = FALSE`. If `center = TRUE`, the center of the ellipse will be indicated with a point, and dashed lines are drawn from this point to the horizontal and vertical axes.
 
 ```{r}
 #axes = FALSE and center = TRUE
