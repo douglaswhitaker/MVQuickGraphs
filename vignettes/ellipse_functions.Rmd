@@ -36,7 +36,7 @@ This is done by using the eigendecomposition of the associated covariance matrix
 
 - `X.mean`: the mean of the two dimensions under consideration from the distribution, as represented by a column matrix.
 
-- `eigen`: the convariance matrix's eigenvalues and eigenvectors, in the same form as the output of _eigen()_. This means that the argument passed should be a list with an entry containing values and another entry containing vectors. Further, the eigenvalues should be ordered from greatest to least.
+- `eigen`: the covariance matrix's eigenvalues and eigenvectors, in the same form as the output of _eigen()_. This means that the argument passed should be a list with an entry containing values and another entry containing vectors. Further, the eigenvalues should be ordered from greatest to least.
 
 - `n`: the number of observations in the data.
 
@@ -71,15 +71,15 @@ confidenceEllipse(X.mean = x.bar,
 
 The function allows for further customization of the generated plot.
 
-By default, reasonable upper and lower limits for the x-axis and y-axis are chosen by the function. With `x1` and `y1`, the user can provide limits via vectors.
+By default, reasonable upper and lower limits for the x-axis and y-axis are chosen by the function. With `xl` and `yl`, the user can provide limits via vectors.
 
 ```{r}
 confidenceEllipse(X.mean = x.bar,
                   eig = eigen_of_cov,
-                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01)
+                  n = n, p = p, xl = c(-3.5,3.5), yl = c(-4.5,4.5), alpha = 0.01)
 ```
 
-If at least one of either `x1` or `y1` is set as NULL, one can adjust the limits computed by the function by providing a value for `lim.adj`. Positive values increase the distance between the upper and lower limits and thus make the ellipse appear smaller. Negative values result in the opposite effect. By default, `lim.adj = 0.02`.
+If at least one of either `xl` or `yl` is set as NULL, one can adjust the limits computed by the function by providing a value for `lim.adj`. Positive values increase the distance between the upper and lower limits and thus make the ellipse appear smaller. Negative values result in the opposite effect. By default, `lim.adj = 0.02`.
 
 ```{r}
 #positive value for lim.adj
@@ -97,7 +97,7 @@ If `axes = TRUE` (which is the case by default), the ellipse's major and minor a
 ```{r}
 confidenceEllipse(X.mean = x.bar,
                   eig = eigen_of_cov,
-                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01, 
+                  n = n, p = p, xl = c(-3.5,3.5), yl = c(-4.5,4.5), alpha = 0.01, 
                   axes = FALSE)
 ```
 
@@ -107,12 +107,12 @@ Further, by default, `center = FALSE`. If `center = TRUE`, the center of the ell
 #axes = FALSE and center = TRUE
 confidenceEllipse(X.mean = x.bar,
                   eig = eigen_of_cov,
-                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01, 
+                  n = n, p = p, xl = c(-3.5,3.5), yl = c(-4.5,4.5), alpha = 0.01, 
                   axes = FALSE, center = TRUE)
 #axes = TRUE and center = TRUE
 confidenceEllipse(X.mean = x.bar,
                   eig = eigen_of_cov,
-                  n = n, p = p, x1 = c(-3,3), y1 = c(-4,4), alpha = 0.01, 
+                  n = n, p = p, xl = c(-3.5,3.5), yl = c(-4.5,4.5), alpha = 0.01, 
                   axes = TRUE, center = TRUE)
 ```
 

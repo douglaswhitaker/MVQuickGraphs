@@ -145,7 +145,7 @@ confidenceEllipse <- function(X.mean = c(0,0),
 #' automatically.
 #' @param axes logical. If \code{axes = TRUE} (default) then the major and
 #' minor axes of the ellipse are plotted.
-#' @param center logical. If \code{axes = TRUE} then the center of the ellipse
+#' @param center logical. If \code{center = TRUE} then the center of the ellipse
 #' is indicated with a point and dashed lines are drawn to the x-axis and
 #' y-axis.
 #' @param lim.adj a value giving an adjustment to the x-axis and y-axis limits
@@ -223,7 +223,7 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 #' computed if either \code{xl = NULL} or \code{yl = NULL}.
 #' @param axes logical. If \code{axes = TRUE}, then the major and minor axes are
 #' graphed.
-#' @param center logical. If \code{axes = TRUE} then the center of the ellipse
+#' @param center logical. If \code{center = TRUE} then the center of the ellipse
 #' is indicated with a point and dashed lines are drawn to the x-axis and
 #' y-axis.
 #' @param \dots other arguments to be passed to the graphing functions.
