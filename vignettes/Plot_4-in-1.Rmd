@@ -1,5 +1,5 @@
 ---
-title: "Plot 4-in-1"
+title: "_plot4in1()_"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Plot 4-in-1}

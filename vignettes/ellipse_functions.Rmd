@@ -26,17 +26,42 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 library(MVQuickGraphs)
 ```
 
-# Bivariate normal confidence ellipses with confidenceEllipse()
+The following functions take the mean and covariance matrix associated with a multivariate normal distribution and use eigendecomposition to plot an appropriate ellipse at the (1-`alpha`)100% level. They are particularly appropriate for experimentation by those learning about multidimensional normal distributions.
 
-For two dimensions under consideration (which are a part of a p-dimensional multivariate normal distribution), _confidenceEllipse()_ plots a two-dimensional (1-`alpha`)100% confidence ellipse.
+## Bivariate normal contour ellipses with _bvNormalContour()_
 
-## Basic functionality
+_bvNormalContour()_ plots a contour ellipse of constant density for a bivariate normal distribution. To do this, arguments must be passed to two parameters: `mu` and either `Sigma` *or* `eig`. 
 
-This is done by using the eigendecomposition of the associated covariance matrix, and as such, arguments must be passed to the following parameters:
+`mu` is the mean of the bivariate normal distribution as represented by a vector. `Sigma` is the associated covariance matrix. If `Sigma` is given, then the function conducts the eigendecomposition itself. Alternatively, the user can provide `eig`, the eigenvalues and eigenvectors of the associated covariance matrix. `eig` must be in the same form as the output from _eigen()_. This means that the argument passed should be a list with an entry containing values and another entry containing vectors. Further, the eigenvalues should be ordered from greatest to least.
+
+Both methods are illustrated below with a simple example. They result in the same ellipse.
+
+```{r}
+#specify bivariate distribution
+mu <- c(-1,8)
+Sigma <- matrix(c(3,2,2,4), ncol = 2)
+
+
+#providing Sigma
+bvNormalContour(mu = mu, Sigma = Sigma)
+#providing eig
+bvNormalContour(mu = mu, eig = eigen(Sigma))
+```
+
+`alpha` can be changed from its default of 0.05. Notice the slight change in the resulting ellipse.
+
+```{r}
+bvNormalContour(mu = mu, eig = eigen(Sigma), alpha = 0.01)
+```
+
+
+## Bivariate normal confidence ellipses with _confidenceEllipse()_
+
+For two dimensions under consideration (which are a part of a p-dimensional multivariate normal distribution), _confidenceEllipse()_ plots a two-dimensional confidence ellipse. Arguments must be passed to the following parameters:
 
 - `X.mean`: the mean of the two dimensions under consideration from the distribution, as represented by a column matrix.
 
-- `eigen`: the covariance matrix's eigenvalues and eigenvectors, in the same form as the output of _eigen()_. This means that the argument passed should be a list with an entry containing values and another entry containing vectors. Further, the eigenvalues should be ordered from greatest to least.
+- `eigen`: the covariance matrix's eigenvalues and eigenvectors, again in the same form as the output of _eigen()_.
 
 - `n`: the number of observations in the data.
 
@@ -59,19 +84,11 @@ confidenceEllipse(X.mean = x.bar,
                   n = n, p = p)
 ```
 
-`alpha` can be changed from its default of 0.05. Notice the slight change in the resulting ellipse.
-
-```{r}
-confidenceEllipse(X.mean = x.bar,
-                  eig = eigen_of_cov,
-                  n = n, p = p, alpha = 0.01)
-```
-
 ## Additional options
 
-The function allows for further customization of the generated plot.
+Both functions allows for further customization of the generated plot. Examples are provided for _confidenceEllipse()_ but these parameters are available to be edited for _bvNormalContour()_ as well. 
 
-By default, reasonable upper and lower limits for the x-axis and y-axis are chosen by the function. With `xl` and `yl`, the user can provide limits via vectors.
+By default, reasonable upper and lower limits for the x-axis and y-axis are chosen by the two functions. With `xl` and `yl`, the user can provide limits via vectors.
 
 ```{r}
 confidenceEllipse(X.mean = x.bar,
@@ -101,7 +118,7 @@ confidenceEllipse(X.mean = x.bar,
                   axes = FALSE)
 ```
 
-Further, by default, `center = FALSE`. If `center = TRUE`, the center of the ellipse will be indicated with a point, and dashed lines are drawn from this point to the horizontal and vertical axes.
+Further, by default, `center = FALSE`. If `center = TRUE`, the center of the ellipse will be indicated with a point, and dashed lines are drawn from this point to the x- and y-axis.
 
 ```{r}
 #axes = FALSE and center = TRUE
@@ -114,15 +131,6 @@ confidenceEllipse(X.mean = x.bar,
                   eig = eigen_of_cov,
                   n = n, p = p, xl = c(-3.5,3.5), yl = c(-4.5,4.5), alpha = 0.01, 
                   axes = TRUE, center = TRUE)
-```
-
-# Bivariate normal contour ellipses with bvNormalContour()
-
-```{r}
-mu <- c(-1,8)
-Sigma <- matrix(c(3,2,2,4), ncol = 2)
-# Draw a 90% contour
-bvNormalContour(mu = mu, Sigma = Sigma, alpha = 0.10)
 ```
 
 # References
