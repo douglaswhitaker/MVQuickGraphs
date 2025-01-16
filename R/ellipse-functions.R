@@ -178,7 +178,8 @@ bvNormalContour <- function(mu = c(0,0), Sigma=NULL, eig=NULL,
 
   # Critical value for the constant density contour (always df=2 because this is bivariate normal)
   # Johnson & Wichern (2008) result (4-8)
-  clevel <- stats::qchisq(1 - alpha, df = 2)
+  # Johnson & Wichern use c^2 as the notation for the critical value; we take the square root immediately
+  clevel <- sqrt(stats::qchisq(1 - alpha, df = 2))
 
   # User needs to supply either eig or Sigma
   if (!is.null(Sigma)){
