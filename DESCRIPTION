@@ -1,8 +1,8 @@
 Package: MVQuickGraphs
 Type: Package
 Title: Quick Multivariate Graphs
-Version: 0.1.6
-Date: 2021-06-23
+Version: 0.1.7
+Date: 2025-01-16
 Authors@R: c(
   person("Douglas", "Whitaker", email = "douglas.whitaker@msvu.ca", 
     role = c("cre", "aut")),
@@ -17,7 +17,7 @@ Description: Functions used for graphing in multivariate contexts. These
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 Imports:
-  stats, graphics, plotrix, corrplot
+  stats, graphics, plotrix
 Suggests:
-  psych
-RoxygenNote: 7.1.1
+  psych, corrplot
+RoxygenNote: 7.3.2

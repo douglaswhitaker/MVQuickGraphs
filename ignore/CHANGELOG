@@ -1,0 +1,3 @@
+---- Version 0.1.7 ----
+
+* Fixed an incorrect calculation of ellipse half-length calculation in bvNormalContour.
