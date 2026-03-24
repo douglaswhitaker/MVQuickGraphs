@@ -1,3 +1,9 @@
+---- Version 0.1.8 ----
+
+* This is the version it will be once I fix the bugs.
+* Updated PP=TRUE option in plot4in1 to match Minitab.
+* Updated some graph labels in plot4in1 to match Minitab.
+
 ---- Version 0.1.7 ----
 
 * Fixed an incorrect calculation of ellipse half-length calculation in bvNormalContour.

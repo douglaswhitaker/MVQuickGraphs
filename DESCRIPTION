@@ -1,8 +1,8 @@
 Package: MVQuickGraphs
 Type: Package
 Title: Quick Multivariate Graphs
-Version: 0.1.7
-Date: 2025-01-16
+Version: 0.1.8
+Date: 2026-03-23
 Authors@R: c(
   person("Douglas", "Whitaker", email = "douglas.whitaker@msvu.ca", 
     role = c("cre", "aut")),

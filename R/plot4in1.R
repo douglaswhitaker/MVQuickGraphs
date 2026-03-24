@@ -93,14 +93,31 @@ plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=
   }
   # P-P Plot
   if (PP){
-    ps <- stats::pnorm(res)
-    graphics::plot(x = stats::ppoints(length(res)),
-         y = sort(ps),
+    #ps <- stats::pnorm(res)
+    graphics::plot(
+      #x = stats::ppoints(length(res)),
+      x = res,
+         #y = sort(ps),
+      y = pnorm(qnorm(benard(res))), # benard(res)
+      log = "y",
+      type = "n",
+      yaxt = "n",
          main = "Normal Probability Plot",
          xlab = ifelse(type=="Regular","Residual",paste(type,"Residual")),
-         ylab = "Percent",
-         pch = pch, col = col, cex = cex, ...)
-    graphics::abline(0, 1, col = "red", ...)
+         ylab = "Percent")#,
+         #pch = pch, col = col, cex = cex, ...)
+    axis(
+      2,
+      at = c(.005,.01,.05,seq(from = .1, to = .9, by = .1), .95, .99, .999),
+      labels = c(.005,.01,.05,seq(from = .1, to = .9, by = .1), .95, .99, .999)*100,
+      las = 2
+    )
+    old_par_var <- graphics::par()$new
+    graphics::par(new = TRUE)
+    graphics::plot(x = sort(res), y = stats::qnorm(benard(sort(res))), axes = FALSE, xlab = "", ylab = "", pch = pch, col = col, cex = cex, ...)
+    graphics::abline(stats::lm(stats::qnorm(benard(res)) ~ res)$coefficients)
+    graphics::par(new = old_par_var)
+    #graphics::abline(0, 1, col = "red", ...)
   }
 
   # Versus Fits
@@ -116,7 +133,7 @@ plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=
   graphics::hist(res,
        col=col,
        main="Histogram",
-       xlab=paste(type,"Residuals"), ...)
+       xlab=ifelse(type=="Regular","Residual",paste(type,"Residual")), ...)
 
   # Versus Order
   n <- length(res)
@@ -127,7 +144,12 @@ plot4in1 <- function(out, type="Regular", PP=TRUE, pch=19, col="steelblue", cex=
        type="o",
        pch=pch,
        xlab="Observation Order",
-       ylab=paste(type,"Residuals"),
+       ylab=ifelse(type=="Regular","Residual",paste(type,"Residual")),
        main="Versus Order", ...)
   graphics::abline(h=0, lty=2, ...)
+}
+
+# Default Minitab rank function
+benard <- function(x){
+  (1:length(x))/(length(x) + 0.4)
 }
